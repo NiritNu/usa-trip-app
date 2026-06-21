@@ -1,0 +1,1 @@
+export default function Disney() { return <><h2>דיסני</h2><div className="grid"><section className="card"><h3>Magic Kingdom</h3><p>להוסיף מתקני חובה, מופעים, אוכל ותוכנית בוקר.</p></section><section className="card"><h3>EPCOT / Hollywood / Animal</h3><p>להוסיף סדר עדיפויות לכל פארק.</p></section></div></>; }

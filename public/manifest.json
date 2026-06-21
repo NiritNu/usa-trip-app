@@ -1,0 +1,9 @@
+{
+  "name": "USA Trip App",
+  "short_name": "Trip",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#0284c7",
+  "icons": []
+}

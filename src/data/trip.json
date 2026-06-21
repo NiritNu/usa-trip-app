@@ -1,0 +1,55 @@
+{
+  "schedule": [
+    {
+      "date": "Day 1",
+      "title": "Travel / Arrival",
+      "area": "General",
+      "notes": "Placeholder only. Add private flight and hotel details locally, not in the public repository."
+    },
+    {
+      "date": "Day 2",
+      "title": "Park / City Day",
+      "area": "General",
+      "notes": "Placeholder only. Replace with your real plan in a private file or after adding secure storage."
+    }
+  ],
+  "areas": [
+    {
+      "id": "new-york",
+      "title": "New York",
+      "description": "Public placeholder for city tips, attractions and map links."
+    },
+    {
+      "id": "disney",
+      "title": "Disney",
+      "description": "Public placeholder for park priorities, Lightning Lane notes and general tips."
+    },
+    {
+      "id": "universal",
+      "title": "Universal",
+      "description": "Public placeholder for park priorities, Express Pass notes and general tips."
+    }
+  ],
+  "checklist": [
+    "Passports",
+    "Travel insurance",
+    "Chargers",
+    "Sunscreen",
+    "Park apps",
+    "Comfortable shoes"
+  ],
+  "links": [
+    {
+      "label": "My Disney Experience",
+      "url": "https://disneyworld.disney.go.com/plan/my-disney-experience/"
+    },
+    {
+      "label": "Universal Orlando App",
+      "url": "https://www.universalorlando.com/web/en/us/plan-your-visit/resort-app"
+    },
+    {
+      "label": "Google Maps",
+      "url": "https://maps.google.com"
+    }
+  ]
+}

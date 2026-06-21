@@ -1,0 +1,1 @@
+export default function LightningLane() { return <><h2>Lightning Lane</h2><section className="card"><h3>תכנון כללי</h3><ul><li>רשימת מתקנים לפי עדיפות</li><li>מה להזמין קודם</li><li>מה מתאים לילדים</li><li>קישור לאפליקציה הרשמית</li></ul></section></>; }

@@ -1,0 +1,1 @@
+export default function Universal() { return <><h2>יוניברסל</h2><div className="card"><h3>פארקים</h3><p>Universal Studios, Islands of Adventure, Epic Universe — להוסיף תוכנית לפי ימים.</p></div></>; }
