@@ -14,6 +14,14 @@ import {
   islandsOfAdventurePark,
 } from "./islandsOfAdventure/index.js";
 
+import {
+  epicUniverseAreas,
+  epicUniverseAttractions,
+  epicUniverseDining,
+  epicUniverseItems,
+  epicUniversePark,
+} from "./epicUniverse/index.js";
+
 export {
   universalStudiosAreas,
   universalStudiosAttractions,
@@ -26,14 +34,12 @@ export {
   islandsOfAdventureDining,
   islandsOfAdventureItems,
   islandsOfAdventurePark,
-};
 
-const epicUniversePark = {
-  id: "epic-universe",
-  name: "Epic Universe",
-  resort: "Universal",
-  areas: [],
-  items: [],
+  epicUniverseAreas,
+  epicUniverseAttractions,
+  epicUniverseDining,
+  epicUniverseItems,
+  epicUniversePark,
 };
 
 export const universalParks = [
