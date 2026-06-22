@@ -24,8 +24,8 @@ export default function Disney() {
       <h1 className="page-title">Disney</h1>
 
       <p className="page-description">
-        מאגר אטרקציות לפי פארק, כולל גובה מינימלי בס״מ, התאמה למשפחה,
-        זמן המתנה ממוצע בספטמבר וטיפים לתכנון.
+        מאגר אטרקציות לפי פארק, כולל מתקנים, הופעות, דמויות, חוויות, אוכל,
+        גובה מינימלי בס״מ, זמן המתנה ממוצע בספטמבר וטיפים לתכנון.
       </p>
 
       <div className="tabs-row">
@@ -64,14 +64,14 @@ export default function Disney() {
 function matchesFilter(item, filter) {
   if (filter === "all") return true;
 
-  if (["ride", "show", "character", "dining"].includes(filter)) {
+  if (["ride", "show", "character", "dining", "experience"].includes(filter)) {
     return item.category === filter;
   }
 
   if (filter === "must_do") return item.priority === "must_do";
   if (filter === "no_height") return item.minHeightCm == null;
   if (filter === "rain") return item.rainFriendly === true;
-  if (filter === "low_wait") return item.avgWaitSeptemberMin <= 25;
+  if (filter === "low_wait") return item.avgWaitSeptemberMin != null && item.avgWaitSeptemberMin <= 25;
 
   return true;
 }

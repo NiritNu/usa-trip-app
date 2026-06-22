@@ -7,7 +7,7 @@ const universalParks = [
   "Universal Studios Florida",
   "Islands of Adventure",
   "Epic Universe",
-  "Volcano Bay"
+  "Volcano Bay",
 ];
 
 export default function Universal() {
@@ -20,17 +20,19 @@ export default function Universal() {
     .filter((item) => matchesFilter(item, activeFilter));
 
   return (
-    <main>
-      <h1>Universal</h1>
-      <p>
-        מאגר אטרקציות ליוניברסל, כולל גובה מינימלי בס״מ, רמת אינטנסיביות,
-        Express, זמני המתנה משוערים וטיפים.
+    <main className="page">
+      <h1 className="page-title">Universal</h1>
+
+      <p className="page-description">
+        מאגר אטרקציות ליוניברסל, כולל מתקנים, הופעות, חוויות, אוכל,
+        גובה מינימלי בס״מ, רמת אינטנסיביות, Express, זמני המתנה משוערים וטיפים.
       </p>
 
       <div className="tabs-row">
         {universalParks.map((park) => (
           <button
             key={park}
+            type="button"
             className={selectedPark === park ? "active" : ""}
             onClick={() => setSelectedPark(park)}
           >
@@ -39,7 +41,10 @@ export default function Universal() {
         ))}
       </div>
 
-      <FilterBar activeFilter={activeFilter} setActiveFilter={setActiveFilter} />
+      <FilterBar
+        activeFilter={activeFilter}
+        setActiveFilter={setActiveFilter}
+      />
 
       <div className="cards-list">
         {filteredAttractions.map((attraction) => (
@@ -48,7 +53,9 @@ export default function Universal() {
       </div>
 
       {filteredAttractions.length === 0 && (
-        <p>אין עדיין פריטים בקטגוריה הזאת.</p>
+        <div className="empty-state">
+          אין עדיין פריטים בקטגוריה הזאת.
+        </div>
       )}
     </main>
   );
@@ -56,12 +63,15 @@ export default function Universal() {
 
 function matchesFilter(item, filter) {
   if (filter === "all") return true;
-  if (["ride", "show", "character", "dining"].includes(filter)) {
+
+  if (["ride", "show", "character", "dining", "experience"].includes(filter)) {
     return item.category === filter;
   }
+
   if (filter === "must_do") return item.priority === "must_do";
   if (filter === "no_height") return item.minHeightCm == null;
   if (filter === "rain") return item.rainFriendly === true;
-  if (filter === "low_wait") return item.avgWaitSeptemberMin <= 25;
+  if (filter === "low_wait") return item.avgWaitSeptemberMin != null && item.avgWaitSeptemberMin <= 25;
+
   return true;
 }
