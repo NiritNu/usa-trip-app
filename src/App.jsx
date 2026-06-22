@@ -1,42 +1,39 @@
-import React from 'react';
-import { HashRouter, Routes, Route, NavLink } from 'react-router-dom';
-import Schedule from './pages/Schedule.jsx';
-import NewYork from './pages/NewYork.jsx';
-import Disney from './pages/Disney.jsx';
-import Universal from './pages/Universal.jsx';
-import LightningLane from './pages/LightningLane.jsx';
-import Checklist from './pages/Checklist.jsx';
-import Links from './pages/Links.jsx';
-
-const tabs = [
-  { path: '/', label: 'לו״ז', element: <Schedule /> },
-  { path: '/new-york', label: 'ניו יורק', element: <NewYork /> },
-  { path: '/disney', label: 'דיסני', element: <Disney /> },
-  { path: '/universal', label: 'יוניברסל', element: <Universal /> },
-  { path: '/lightning-lane', label: 'Lightning Lane', element: <LightningLane /> },
-  { path: '/checklist', label: 'צ׳ק ליסט', element: <Checklist /> },
-  { path: '/links', label: 'קישורים', element: <Links /> }
-];
+import { NavLink, Routes, Route } from "react-router-dom";
+import Schedule from "./pages/Schedule";
+import NewYork from "./pages/NewYork";
+import Disney from "./pages/Disney";
+import Universal from "./pages/Universal";
+import LightningLane from "./pages/LightningLane";
+import Checklist from "./pages/Checklist";
+import Links from "./pages/Links";
 
 export default function App() {
   return (
-    <HashRouter>
+    <div className="app-shell">
       <header className="app-header">
         <h1>USA Trip App</h1>
         <p>טיול משפחתי — ניו יורק, דיסני ויוניברסל</p>
       </header>
-      <nav className="tabs">
-        {tabs.map(tab => (
-          <NavLink key={tab.path} to={tab.path} end={tab.path === '/'} className={({ isActive }) => isActive ? 'tab active' : 'tab'}>
-            {tab.label}
-          </NavLink>
-        ))}
+
+      <nav className="app-nav" aria-label="Main navigation">
+        <NavLink to="/" end>לו״ז</NavLink>
+        <NavLink to="/new-york">ניו יורק</NavLink>
+        <NavLink to="/disney">דיסני</NavLink>
+        <NavLink to="/universal">יוניברסל</NavLink>
+        <NavLink to="/lightning-lane">Lightning Lane</NavLink>
+        <NavLink to="/checklist">צ׳ק ליסט</NavLink>
+        <NavLink to="/links">קישורים</NavLink>
       </nav>
-      <main className="page">
-        <Routes>
-          {tabs.map(tab => <Route key={tab.path} path={tab.path} element={tab.element} />)}
-        </Routes>
-      </main>
-    </HashRouter>
+
+      <Routes>
+        <Route path="/" element={<Schedule />} />
+        <Route path="/new-york" element={<NewYork />} />
+        <Route path="/disney" element={<Disney />} />
+        <Route path="/universal" element={<Universal />} />
+        <Route path="/lightning-lane" element={<LightningLane />} />
+        <Route path="/checklist" element={<Checklist />} />
+        <Route path="/links" element={<Links />} />
+      </Routes>
+    </div>
   );
 }
