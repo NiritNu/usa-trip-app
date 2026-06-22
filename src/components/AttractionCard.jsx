@@ -1,11 +1,38 @@
+import { useEffect, useState } from "react";
+
+const DONE_STORAGE_KEY = "trip-done-items";
+
 export default function AttractionCard({ attraction }) {
+  const [doneItems, setDoneItems] = useState({});
+
+  useEffect(() => {
+    try {
+      const saved = JSON.parse(localStorage.getItem(DONE_STORAGE_KEY) || "{}");
+      setDoneItems(saved);
+    } catch {
+      setDoneItems({});
+    }
+  }, []);
+
+  const isDone = !!doneItems[attraction.id];
+
+  function toggleDone() {
+    const next = {
+      ...doneItems,
+      [attraction.id]: !isDone,
+    };
+
+    setDoneItems(next);
+    localStorage.setItem(DONE_STORAGE_KEY, JSON.stringify(next));
+  }
+
   const heightText =
     attraction.minHeightCm == null
       ? "ללא מגבלת גובה"
       : `${attraction.minHeightCm} ס״מ`;
 
   return (
-    <article className="card">
+    <article className={`card ${isDone ? "done-card" : ""}`}>
       <div className="card-header">
         <div>
           <h3>{attraction.name}</h3>
@@ -22,14 +49,23 @@ export default function AttractionCard({ attraction }) {
           )}
         </div>
 
-        {attraction.category && (
-          <span className="tag">{labelCategory(attraction.category)}</span>
-        )}
+        <div className="card-actions">
+          {attraction.category && (
+            <span className="tag">{labelCategory(attraction.category)}</span>
+          )}
+
+          <button
+            type="button"
+            className={`done-button ${isDone ? "active" : ""}`}
+            onClick={toggleDone}
+            aria-pressed={isDone}
+          >
+            {isDone ? "✓ בוצע" : "סמן בוצע"}
+          </button>
+        </div>
       </div>
 
-      {attraction.shortDescription && (
-        <p>{attraction.shortDescription}</p>
-      )}
+      {attraction.shortDescription && <p>{attraction.shortDescription}</p>}
 
       <div className="info-grid">
         <div>
@@ -89,22 +125,19 @@ export default function AttractionCard({ attraction }) {
 
         {attraction.planningNeeded && (
           <div>
-            <strong>תכנון:</strong>{" "}
-            {labelPlanning(attraction.planningNeeded)}
+            <strong>תכנון:</strong> {labelPlanning(attraction.planningNeeded)}
           </div>
         )}
 
         {attraction.familyMode && (
           <div>
-            <strong>משפחתי:</strong>{" "}
-            {labelFamilyMode(attraction.familyMode)}
+            <strong>משפחתי:</strong> {labelFamilyMode(attraction.familyMode)}
           </div>
         )}
 
         {attraction.indoor != null && (
           <div>
-            <strong>מקורה/ממוזג:</strong>{" "}
-            {attraction.indoor ? "כן" : "לא"}
+            <strong>מקורה/ממוזג:</strong> {attraction.indoor ? "כן" : "לא"}
           </div>
         )}
 
@@ -132,6 +165,19 @@ export default function AttractionCard({ attraction }) {
         {attraction.energyLevel && (
           <div>
             <strong>מאמץ:</strong> {labelEnergy(attraction.energyLevel)}
+          </div>
+        )}
+
+        {attraction.diningType && (
+          <div>
+            <strong>סוג אוכל:</strong> {labelDiningType(attraction.diningType)}
+          </div>
+        )}
+
+        {attraction.mobileOrder != null && (
+          <div>
+            <strong>Mobile Order:</strong>{" "}
+            {attraction.mobileOrder ? "כן" : "לא"}
           </div>
         )}
       </div>
@@ -180,11 +226,11 @@ function labelCategory(value) {
     show: "הופעה",
     character: "דמויות",
     dining: "אוכל",
+    experience: "חוויה",
     museum: "מוזיאון",
     park: "פארק",
     store: "חנות",
     view: "תצפית",
-    experience: "חוויה",
     outdoors: "חוץ",
   };
 
@@ -242,6 +288,7 @@ function labelPlanning(value) {
     lightning_lane_recommended: "מומלץ Lightning Lane",
     advance_dining_reservation_recommended: "מומלץ להזמין מראש",
     arrive_early_for_spot: "להגיע מוקדם למקום טוב",
+    check_same_day_hours: "לבדוק שעות באותו יום",
   };
 
   return labels[value] || value;
@@ -291,6 +338,16 @@ function labelEnergy(value) {
     low: "קליל",
     medium: "בינוני",
     high: "גבוה",
+  };
+
+  return labels[value] || value;
+}
+
+function labelDiningType(value) {
+  const labels = {
+    quick_service: "Quick Service",
+    table_service: "Table Service",
+    snack: "נשנוש",
   };
 
   return labels[value] || value;
