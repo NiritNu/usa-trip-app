@@ -69,6 +69,8 @@ export default function AttractionCard({ attraction }) {
         <AttractionInfo attraction={attraction} />
       )}
 
+      {attraction.express && <ExpressInfo attraction={attraction} />}
+
       {attraction.suitableFor?.length > 0 && (
         <div className="nearby-box">
           <strong>מתאים בעיקר ל:</strong>
@@ -266,6 +268,61 @@ function DiningInfo({ attraction }) {
   );
 }
 
+function ExpressInfo({ attraction }) {
+  const express = attraction.express;
+  const priority = attraction.expressPriority || "check_same_day";
+
+  const classes = [
+    "nearby-box",
+    "express-box",
+    priority === "use" ? "express-use" : "",
+    priority === "not_needed" ? "express-not-needed" : "",
+    priority === "not_available" ? "express-not-available" : "",
+  ]
+    .filter(Boolean)
+    .join(" ");
+
+  return (
+    <div className={classes}>
+      <strong>Express:</strong>
+
+      <div className="nearby-list">
+        {express.includedWithHotel != null && (
+          <span>
+            {express.includedWithHotel ? "כלול לכם" : "לא כלול לכם"}
+          </span>
+        )}
+
+        {express.type && <span>{labelExpressType(express.type)}</span>}
+
+        <span>{labelExpressPriority(priority)}</span>
+      </div>
+
+      <p className="mini-note">{buildExpressSummary(express, priority)}</p>
+    </div>
+  );
+}
+
+function buildExpressSummary(express, priority) {
+  if (priority === "use") {
+    return "כאן כן כדאי להשתמש ב-Express, במיוחד אם התור רגיל/ארוך.";
+  }
+
+  if (priority === "not_needed") {
+    return "יש לכם Express, אבל לא חייבים לבזבז אותו אם התור קצר.";
+  }
+
+  if (priority === "not_available") {
+    return "Express לא רלוונטי כאן — בדרך כלל זו חוויה, דמות, אזור פתוח או אוכל.";
+  }
+
+  if (express.type === "once_per_ride") {
+    return "ב-Epic זה כנראה מוגבל יותר — לבדוק תנאים באפליקציה/כרטיס.";
+  }
+
+  return "לבדוק באותו יום לפי התור בפועל.";
+}
+
 function labelCategory(value) {
   const labels = {
     ride: "מתקן",
@@ -379,16 +436,6 @@ function labelBestTime(value) {
   return labels[value] || value;
 }
 
-function labelEnergy(value) {
-  const labels = {
-    low: "קליל",
-    medium: "בינוני",
-    high: "גבוה",
-  };
-
-  return labels[value] || value;
-}
-
 function labelDiningType(value) {
   const labels = {
     quick_service: "Quick Service",
@@ -425,6 +472,28 @@ function labelFoodStyle(value) {
     dessert: "קינוח",
     snack: "נשנוש",
     fish_and_chips: "פיש אנד צ׳יפס",
+  };
+
+  return labels[value] || value;
+}
+
+function labelExpressType(value) {
+  const labels = {
+    unlimited: "Unlimited",
+    once_per_ride: "פעם אחת לכל מתקן",
+    not_available: "לא זמין",
+    unknown: "לא ברור",
+  };
+
+  return labels[value] || value;
+}
+
+function labelExpressPriority(value) {
+  const labels = {
+    use: "כדאי להשתמש",
+    not_needed: "לא קריטי אם התור קצר",
+    not_available: "לא רלוונטי",
+    check_same_day: "לבדוק באותו יום",
   };
 
   return labels[value] || value;
