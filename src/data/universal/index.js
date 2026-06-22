@@ -6,20 +6,26 @@ import {
   universalStudiosPark,
 } from "./universalStudios/index.js";
 
+import {
+  islandsOfAdventureAreas,
+  islandsOfAdventureAttractions,
+  islandsOfAdventureDining,
+  islandsOfAdventureItems,
+  islandsOfAdventurePark,
+} from "./islandsOfAdventure/index.js";
+
 export {
   universalStudiosAreas,
   universalStudiosAttractions,
   universalStudiosDining,
   universalStudiosItems,
   universalStudiosPark,
-};
 
-const islandsOfAdventurePark = {
-  id: "islands-of-adventure",
-  name: "Islands of Adventure",
-  resort: "Universal",
-  areas: [],
-  items: [],
+  islandsOfAdventureAreas,
+  islandsOfAdventureAttractions,
+  islandsOfAdventureDining,
+  islandsOfAdventureItems,
+  islandsOfAdventurePark,
 };
 
 const epicUniversePark = {
