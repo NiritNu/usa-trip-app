@@ -1,0 +1,999 @@
+import fs from "fs";
+import path from "path";
+import { fileURLToPath, pathToFileURL } from "url";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+const projectRoot = path.resolve(__dirname, "..");
+
+const attractionsPath = path.join(
+  projectRoot,
+  "src",
+  "data",
+  "disney",
+  "epcot",
+  "attractions.js"
+);
+
+const module = await import(pathToFileURL(attractionsPath).href);
+const currentItems = module.epcotAttractions || [];
+
+const updates = [
+  {
+    id: "luminous-the-symphony-of-us",
+    name: "Luminous The Symphony of Us",
+    resort: "Disney",
+    park: "EPCOT",
+    area: "World Showcase Lagoon",
+    areaId: "world-showcase",
+    category: "show",
+    shortDescription:
+      "מופע הלילה המרכזי של EPCOT עם זיקוקים, מזרקות, תאורה ומוזיקה סביב הלגונה.",
+    minHeightCm: null,
+    intensity: "calm",
+    scareFactor: "low",
+    motionSicknessRisk: "low",
+    priority: "must_do",
+    avgWaitSeptemberMin: null,
+    waitLevelSeptember: "schedule_based",
+    bestTimeToRide: ["night"],
+    planningNeeded: "arrive_early_for_spot",
+    skipLine: "None",
+    suitableFor: ["preschooler", "youngKid", "olderKid", "adults"],
+    familyMode: "all_together",
+    indoor: false,
+    rainFriendly: false,
+    durationMin: 20,
+    nearby: [
+      "World Showcase Lagoon",
+      "Mexico Pavilion",
+      "Canada Pavilion",
+      "France Pavilion"
+    ],
+    tip:
+      "אם נשארים לערב — זה עוגן טוב לסיום. לבחור מקום צפייה בלי להידחק במרכז."
+  },
+  {
+    id: "jammitors",
+    name: "JAMMitors",
+    resort: "Disney",
+    park: "EPCOT",
+    area: "World Celebration",
+    areaId: "world-celebration",
+    category: "show",
+    shortDescription:
+      "הופעת רחוב קצרה וקצבית של מתופפים עם פחים וכלי ניקיון. קלילה ומפתיעה.",
+    minHeightCm: null,
+    intensity: "calm",
+    scareFactor: "none",
+    motionSicknessRisk: "low",
+    priority: "good_if_time",
+    avgWaitSeptemberMin: null,
+    waitLevelSeptember: "schedule_based",
+    bestTimeToRide: ["morning", "afternoon"],
+    planningNeeded: "check_same_day_hours",
+    skipLine: "None",
+    suitableFor: ["preschooler", "youngKid", "olderKid"],
+    familyMode: "all_together",
+    indoor: false,
+    rainFriendly: false,
+    durationMin: 10,
+    nearby: [
+      "Spaceship Earth",
+      "Dreamers Point",
+      "Connections Eatery",
+      "Creations Shop"
+    ],
+    tip:
+      "לא לתכנן במיוחד, אבל אם רואים אותם מופיעים — לעצור. זה קצר וכיף לילדים."
+  },
+  {
+    id: "celebracion-encanto",
+    name: "¡Celebración Encanto!",
+    resort: "Disney",
+    park: "EPCOT",
+    area: "CommuniCore Plaza",
+    areaId: "world-celebration",
+    category: "show",
+    shortDescription:
+      "מופע במה מוזיקלי בהשראת Encanto עם שירים ודמויות. מתאים במיוחד לילדים שאוהבים את הסרט.",
+    minHeightCm: null,
+    intensity: "calm",
+    scareFactor: "none",
+    motionSicknessRisk: "low",
+    priority: "good_if_time",
+    avgWaitSeptemberMin: null,
+    waitLevelSeptember: "schedule_based",
+    bestTimeToRide: ["scheduled_time"],
+    planningNeeded: "check_same_day_hours",
+    skipLine: "None",
+    suitableFor: ["preschooler", "youngKid", "olderKid"],
+    familyMode: "all_together",
+    indoor: false,
+    rainFriendly: false,
+    durationMin: 20,
+    nearby: [
+      "Spaceship Earth",
+      "Dreamers Point",
+      "Connections Eatery",
+      "Creations Shop"
+    ],
+    tip:
+      "לבדוק באפליקציה הרשמית אם מופיע בתאריכים שלכם. טוב אם אתם כבר ב־World Celebration."
+  },
+  {
+    id: "mickey-and-friends",
+    name: "Mickey & Friends",
+    resort: "Disney",
+    park: "EPCOT",
+    area: "World Celebration",
+    areaId: "world-celebration",
+    category: "character",
+    shortDescription:
+      "מפגש דמויות מרכזי עם מיקי וחברים. לרוב מקורה ונוח יותר ממפגשי רחוב.",
+    minHeightCm: null,
+    intensity: "calm",
+    scareFactor: "none",
+    motionSicknessRisk: "low",
+    priority: "must_do",
+    avgWaitSeptemberMin: 25,
+    waitLevelSeptember: "medium",
+    bestTimeToRide: ["morning", "afternoon"],
+    planningNeeded: "check_same_day_hours",
+    skipLine: "None",
+    suitableFor: ["preschooler", "youngKid", "olderKid"],
+    familyMode: "all_together",
+    indoor: true,
+    rainFriendly: true,
+    durationMin: 15,
+    nearby: [
+      "Spaceship Earth",
+      "Dreamers Point",
+      "Connections Eatery",
+      "Creations Shop"
+    ],
+    tip:
+      "שווה אם רוצים תמונות דמויות בלי לרדוף אחרי דמויות בכל המדינות."
+  },
+  {
+    id: "meet-pluto-epcot-entrance",
+    name: "Meet Pluto Near EPCOT Main Entrance",
+    resort: "Disney",
+    park: "EPCOT",
+    area: "Main Entrance",
+    areaId: "world-celebration",
+    category: "character",
+    shortDescription:
+      "מפגש עם פלוטו ליד הכניסה הראשית, לפי שעות פעילות באותו יום.",
+    minHeightCm: null,
+    intensity: "calm",
+    scareFactor: "none",
+    motionSicknessRisk: "low",
+    priority: "good_if_time",
+    avgWaitSeptemberMin: 15,
+    waitLevelSeptember: "low",
+    bestTimeToRide: ["morning"],
+    planningNeeded: "check_same_day_hours",
+    skipLine: "None",
+    suitableFor: ["preschooler", "youngKid"],
+    familyMode: "all_together",
+    indoor: false,
+    rainFriendly: false,
+    durationMin: 10,
+    nearby: [
+      "Spaceship Earth",
+      "Dreamers Point",
+      "Mickey & Friends",
+      "Creations Shop"
+    ],
+    tip:
+      "טוב אם נכנסים ורואים תור קצר. לא הייתי חוזרת במיוחד מהצד השני של הפארק."
+  },
+  {
+    id: "meet-figment-imageworks",
+    name: "Meet Figment Inside ImageWorks",
+    resort: "Disney",
+    park: "EPCOT",
+    area: "World Celebration",
+    areaId: "world-celebration",
+    category: "character",
+    shortDescription:
+      "מפגש עם Figment בתוך ImageWorks, ליד Journey Into Imagination.",
+    minHeightCm: null,
+    intensity: "calm",
+    scareFactor: "none",
+    motionSicknessRisk: "low",
+    priority: "good_if_time",
+    avgWaitSeptemberMin: 20,
+    waitLevelSeptember: "medium",
+    bestTimeToRide: ["midday", "afternoon"],
+    planningNeeded: "check_same_day_hours",
+    skipLine: "None",
+    suitableFor: ["preschooler", "youngKid", "olderKid"],
+    familyMode: "all_together",
+    indoor: true,
+    rainFriendly: true,
+    durationMin: 10,
+    nearby: [
+      "Journey Into Imagination With Figment",
+      "ImageWorks - The What If Labs",
+      "Disney and Pixar Short Film Festival",
+      "Dreamers Point"
+    ],
+    tip:
+      "טוב לשלב עם Figment ו־ImageWorks, במיוחד כשצריך מזגן."
+  },
+  {
+    id: "project-tomorrow",
+    name: "Project Tomorrow",
+    resort: "Disney",
+    park: "EPCOT",
+    area: "World Celebration",
+    areaId: "world-celebration",
+    category: "experience",
+    shortDescription:
+      "אזור אינטראקטיבי אחרי Spaceship Earth עם משחקים ותצוגות קצרות.",
+    minHeightCm: null,
+    intensity: "calm",
+    scareFactor: "none",
+    motionSicknessRisk: "low",
+    priority: "good_if_time",
+    avgWaitSeptemberMin: 0,
+    waitLevelSeptember: "low",
+    bestTimeToRide: ["midday", "afternoon"],
+    planningNeeded: "no_reservation",
+    skipLine: "None",
+    suitableFor: ["youngKid", "olderKid"],
+    familyMode: "all_together",
+    indoor: true,
+    rainFriendly: true,
+    durationMin: 15,
+    nearby: [
+      "Spaceship Earth",
+      "Mickey & Friends",
+      "Dreamers Point",
+      "Connections Eatery"
+    ],
+    tip:
+      "נוח אם יורדים מ־Spaceship Earth ורוצים עוד כמה דקות מזגן בלי תור."
+  },
+  {
+    id: "kidcot-fun-stops",
+    name: "Kidcot Fun Stops",
+    resort: "Disney",
+    park: "EPCOT",
+    area: "World Showcase",
+    areaId: "world-showcase",
+    category: "experience",
+    shortDescription:
+      "תחנות יצירה לילדים במדינות World Showcase. דרך טובה להפוך את הסיבוב סביב המדינות ליותר מעניין לילדים.",
+    minHeightCm: null,
+    intensity: "calm",
+    scareFactor: "none",
+    motionSicknessRisk: "low",
+    priority: "must_do",
+    avgWaitSeptemberMin: 0,
+    waitLevelSeptember: "low",
+    bestTimeToRide: ["afternoon", "evening"],
+    planningNeeded: "no_reservation",
+    skipLine: "None",
+    suitableFor: ["preschooler", "youngKid", "olderKid"],
+    familyMode: "all_together",
+    indoor: true,
+    rainFriendly: true,
+    durationMin: 30,
+    nearby: [
+      "World Showcase",
+      "Gran Fiesta Tour Starring The Three Caballeros",
+      "Frozen Ever After",
+      "Remy's Ratatouille Adventure"
+    ],
+    tip:
+      "מאוד שימושי עם ילדים ב־EPCOT. לא חייבים להשלים את כל התחנות; אפשר לעשות חלק."
+  },
+  {
+    id: "meet-donald-duck-mexico",
+    name: "Meet Donald Duck in Mexico",
+    resort: "Disney",
+    park: "EPCOT",
+    area: "World Showcase",
+    areaId: "world-showcase",
+    category: "character",
+    shortDescription:
+      "מפגש עם דונלד דאק באזור מקסיקו, לרוב בלבוש מקסיקני.",
+    minHeightCm: null,
+    intensity: "calm",
+    scareFactor: "none",
+    motionSicknessRisk: "low",
+    priority: "good_if_time",
+    avgWaitSeptemberMin: 20,
+    waitLevelSeptember: "medium",
+    bestTimeToRide: ["morning", "afternoon"],
+    planningNeeded: "check_same_day_hours",
+    skipLine: "None",
+    suitableFor: ["preschooler", "youngKid", "olderKid"],
+    familyMode: "all_together",
+    indoor: false,
+    rainFriendly: false,
+    durationMin: 10,
+    nearby: [
+      "Gran Fiesta Tour Starring The Three Caballeros",
+      "La Cantina de San Angel",
+      "Frozen Ever After",
+      "Royal Sommerhus"
+    ],
+    tip:
+      "טוב אם אתם באזור מקסיקו והתור קצר."
+  },
+  {
+    id: "mariachi-cobre",
+    name: "Mariachi Cobre",
+    resort: "Disney",
+    park: "EPCOT",
+    area: "World Showcase",
+    areaId: "world-showcase",
+    category: "show",
+    shortDescription:
+      "הופעת מוזיקה מקסיקנית חיה באזור Mexico Pavilion.",
+    minHeightCm: null,
+    intensity: "calm",
+    scareFactor: "none",
+    motionSicknessRisk: "low",
+    priority: "good_if_time",
+    avgWaitSeptemberMin: null,
+    waitLevelSeptember: "schedule_based",
+    bestTimeToRide: ["afternoon", "evening"],
+    planningNeeded: "check_same_day_hours",
+    skipLine: "None",
+    suitableFor: ["preschooler", "youngKid", "olderKid", "adults"],
+    familyMode: "all_together",
+    indoor: false,
+    rainFriendly: false,
+    durationMin: 15,
+    nearby: [
+      "Gran Fiesta Tour Starring The Three Caballeros",
+      "La Cantina de San Angel",
+      "Meet Donald Duck in Mexico",
+      "Frozen Ever After"
+    ],
+    tip:
+      "עצירה נחמדה אם עוברים במקסיקו בזמן הופעה. לא מצריך תכנון מיוחד."
+  },
+  {
+    id: "meet-mulan-china",
+    name: "Meet Mulan in China",
+    resort: "Disney",
+    park: "EPCOT",
+    area: "World Showcase",
+    areaId: "world-showcase",
+    category: "character",
+    shortDescription:
+      "מפגש עם מולאן באזור China Pavilion, לפי שעות באותו יום.",
+    minHeightCm: null,
+    intensity: "calm",
+    scareFactor: "none",
+    motionSicknessRisk: "low",
+    priority: "good_if_time",
+    avgWaitSeptemberMin: 20,
+    waitLevelSeptember: "medium",
+    bestTimeToRide: ["morning", "afternoon"],
+    planningNeeded: "check_same_day_hours",
+    skipLine: "None",
+    suitableFor: ["youngKid", "olderKid"],
+    familyMode: "all_together",
+    indoor: false,
+    rainFriendly: false,
+    durationMin: 10,
+    nearby: [
+      "Reflections of China",
+      "Lotus Blossom Café",
+      "Frozen Ever After",
+      "Germany Pavilion"
+    ],
+    tip:
+      "שווה אם אתם כבר עוברים בסין. לבדוק שעות לפני שמגיעים."
+  },
+  {
+    id: "reflections-of-china",
+    name: "Reflections of China",
+    resort: "Disney",
+    park: "EPCOT",
+    area: "World Showcase",
+    areaId: "world-showcase",
+    category: "show",
+    shortDescription:
+      "סרט פנורמי על סין בתוך China Pavilion. ממוזג ורגוע.",
+    minHeightCm: null,
+    intensity: "calm",
+    scareFactor: "none",
+    motionSicknessRisk: "low",
+    priority: "skip_if_busy",
+    avgWaitSeptemberMin: 5,
+    waitLevelSeptember: "low",
+    bestTimeToRide: ["midday", "afternoon"],
+    planningNeeded: "no_reservation",
+    skipLine: "None",
+    suitableFor: ["olderKid", "adults"],
+    familyMode: "some_together",
+    indoor: true,
+    rainFriendly: true,
+    durationMin: 14,
+    nearby: [
+      "Meet Mulan in China",
+      "Lotus Blossom Café",
+      "Germany Pavilion",
+      "Frozen Ever After"
+    ],
+    tip:
+      "בעיקר מזגן ומנוחה. לא חובה לילדים."
+  },
+  {
+    id: "meet-snow-white-germany",
+    name: "Meet Snow White in Germany",
+    resort: "Disney",
+    park: "EPCOT",
+    area: "World Showcase",
+    areaId: "world-showcase",
+    category: "character",
+    shortDescription:
+      "מפגש עם שלגיה באזור Germany Pavilion.",
+    minHeightCm: null,
+    intensity: "calm",
+    scareFactor: "none",
+    motionSicknessRisk: "low",
+    priority: "good_if_time",
+    avgWaitSeptemberMin: 20,
+    waitLevelSeptember: "medium",
+    bestTimeToRide: ["morning", "afternoon"],
+    planningNeeded: "check_same_day_hours",
+    skipLine: "None",
+    suitableFor: ["preschooler", "youngKid"],
+    familyMode: "all_together",
+    indoor: false,
+    rainFriendly: false,
+    durationMin: 10,
+    nearby: [
+      "Germany Pavilion",
+      "Lotus Blossom Café",
+      "The American Adventure",
+      "Regal Eagle Smokehouse"
+    ],
+    tip:
+      "טוב אם נסיכות חשובות לכם ואתם כבר בסיבוב המדינות."
+  },
+  {
+    id: "germany-gazebo-entertainment",
+    name: "Entertainment at Germany Gazebo",
+    resort: "Disney",
+    park: "EPCOT",
+    area: "World Showcase",
+    areaId: "world-showcase",
+    category: "show",
+    shortDescription:
+      "הופעות חיות קצרות באזור Germany Pavilion, לפי לוח יומי.",
+    minHeightCm: null,
+    intensity: "calm",
+    scareFactor: "none",
+    motionSicknessRisk: "low",
+    priority: "good_if_time",
+    avgWaitSeptemberMin: null,
+    waitLevelSeptember: "schedule_based",
+    bestTimeToRide: ["afternoon", "evening"],
+    planningNeeded: "check_same_day_hours",
+    skipLine: "None",
+    suitableFor: ["preschooler", "youngKid", "olderKid", "adults"],
+    familyMode: "all_together",
+    indoor: false,
+    rainFriendly: false,
+    durationMin: 15,
+    nearby: [
+      "Meet Snow White in Germany",
+      "Germany Pavilion",
+      "The American Adventure",
+      "Lotus Blossom Café"
+    ],
+    tip:
+      "לעצור רק אם עוברים ויש הופעה. לא חובה."
+  },
+  {
+    id: "voices-of-liberty",
+    name: "Voices of Liberty",
+    resort: "Disney",
+    park: "EPCOT",
+    area: "World Showcase",
+    areaId: "world-showcase",
+    category: "show",
+    shortDescription:
+      "הרכב קולי א-קפלה בתוך America Pavilion. איכותי וממוזג.",
+    minHeightCm: null,
+    intensity: "calm",
+    scareFactor: "none",
+    motionSicknessRisk: "low",
+    priority: "good_if_time",
+    avgWaitSeptemberMin: null,
+    waitLevelSeptember: "schedule_based",
+    bestTimeToRide: ["midday", "afternoon"],
+    planningNeeded: "check_same_day_hours",
+    skipLine: "None",
+    suitableFor: ["olderKid", "adults"],
+    familyMode: "some_together",
+    indoor: true,
+    rainFriendly: true,
+    durationMin: 15,
+    nearby: [
+      "The American Adventure",
+      "Regal Eagle Smokehouse",
+      "Japan Pavilion",
+      "Italy Pavilion"
+    ],
+    tip:
+      "איכותי וממוזג, אבל לא בטוח שילדים קטנים יתעניינו."
+  },
+  {
+    id: "matsuriza",
+    name: "Matsuriza",
+    resort: "Disney",
+    park: "EPCOT",
+    area: "World Showcase",
+    areaId: "world-showcase",
+    category: "show",
+    shortDescription:
+      "הופעת תופי טאיקו יפניים באזור Japan Pavilion. קצרה, חזקה ומרשימה.",
+    minHeightCm: null,
+    intensity: "mild",
+    scareFactor: "none",
+    motionSicknessRisk: "low",
+    priority: "good_if_time",
+    avgWaitSeptemberMin: null,
+    waitLevelSeptember: "schedule_based",
+    bestTimeToRide: ["afternoon", "evening"],
+    planningNeeded: "check_same_day_hours",
+    skipLine: "None",
+    suitableFor: ["youngKid", "olderKid", "adults"],
+    familyMode: "all_together",
+    indoor: false,
+    rainFriendly: false,
+    durationMin: 15,
+    nearby: [
+      "Katsura Grill",
+      "Japan Pavilion",
+      "The American Adventure",
+      "Morocco Pavilion"
+    ],
+    tip:
+      "אם הילדים אוהבים מוזיקה/תופים — זו עצירה טובה מאוד בסיבוב המדינות."
+  },
+  {
+    id: "meet-princess-jasmine-morocco",
+    name: "Meet Princess Jasmine in Morocco",
+    resort: "Disney",
+    park: "EPCOT",
+    area: "World Showcase",
+    areaId: "world-showcase",
+    category: "character",
+    shortDescription:
+      "מפגש עם יסמין באזור Morocco Pavilion.",
+    minHeightCm: null,
+    intensity: "calm",
+    scareFactor: "none",
+    motionSicknessRisk: "low",
+    priority: "good_if_time",
+    avgWaitSeptemberMin: 20,
+    waitLevelSeptember: "medium",
+    bestTimeToRide: ["morning", "afternoon"],
+    planningNeeded: "check_same_day_hours",
+    skipLine: "None",
+    suitableFor: ["preschooler", "youngKid", "olderKid"],
+    familyMode: "all_together",
+    indoor: false,
+    rainFriendly: false,
+    durationMin: 10,
+    nearby: [
+      "Morocco Pavilion",
+      "Japan Pavilion",
+      "France Pavilion",
+      "Katsura Grill"
+    ],
+    tip:
+      "שווה אם יסמין חשובה לכם; אחרת רק אם התור קצר."
+  },
+  {
+    id: "meet-belle-france",
+    name: "Meet Belle in France",
+    resort: "Disney",
+    park: "EPCOT",
+    area: "World Showcase",
+    areaId: "world-showcase",
+    category: "character",
+    shortDescription:
+      "מפגש עם בל באזור France Pavilion, לרוב בחוץ ולפי שעות.",
+    minHeightCm: null,
+    intensity: "calm",
+    scareFactor: "none",
+    motionSicknessRisk: "low",
+    priority: "good_if_time",
+    avgWaitSeptemberMin: 20,
+    waitLevelSeptember: "medium",
+    bestTimeToRide: ["morning", "afternoon"],
+    planningNeeded: "check_same_day_hours",
+    skipLine: "None",
+    suitableFor: ["preschooler", "youngKid", "olderKid"],
+    familyMode: "all_together",
+    indoor: false,
+    rainFriendly: false,
+    durationMin: 10,
+    nearby: [
+      "Remy's Ratatouille Adventure",
+      "Les Halles Boulangerie-Patisserie",
+      "Beauty and the Beast Sing-Along",
+      "Impressions de France"
+    ],
+    tip:
+      "טוב לשלב כשאתם בצרפת ליד רמי/המאפייה."
+  },
+  {
+    id: "meet-princess-aurora-france",
+    name: "Meet Princess Aurora in France",
+    resort: "Disney",
+    park: "EPCOT",
+    area: "World Showcase",
+    areaId: "world-showcase",
+    category: "character",
+    shortDescription:
+      "מפגש עם אורורה בגזיבו באזור France Pavilion.",
+    minHeightCm: null,
+    intensity: "calm",
+    scareFactor: "none",
+    motionSicknessRisk: "low",
+    priority: "good_if_time",
+    avgWaitSeptemberMin: 20,
+    waitLevelSeptember: "medium",
+    bestTimeToRide: ["morning", "afternoon"],
+    planningNeeded: "check_same_day_hours",
+    skipLine: "None",
+    suitableFor: ["preschooler", "youngKid"],
+    familyMode: "all_together",
+    indoor: false,
+    rainFriendly: false,
+    durationMin: 10,
+    nearby: [
+      "Remy's Ratatouille Adventure",
+      "Les Halles Boulangerie-Patisserie",
+      "Beauty and the Beast Sing-Along",
+      "Impressions de France"
+    ],
+    tip:
+      "מפגש נסיכות טוב אם אתם כבר באזור צרפת. לבדוק שעות באפליקציה."
+  },
+  {
+    id: "meet-alice-united-kingdom",
+    name: "Meet Alice in the United Kingdom",
+    resort: "Disney",
+    park: "EPCOT",
+    area: "World Showcase",
+    areaId: "world-showcase",
+    category: "character",
+    shortDescription:
+      "מפגש עם אליס באזור United Kingdom Pavilion.",
+    minHeightCm: null,
+    intensity: "calm",
+    scareFactor: "none",
+    motionSicknessRisk: "low",
+    priority: "good_if_time",
+    avgWaitSeptemberMin: 20,
+    waitLevelSeptember: "medium",
+    bestTimeToRide: ["morning", "afternoon"],
+    planningNeeded: "check_same_day_hours",
+    skipLine: "None",
+    suitableFor: ["preschooler", "youngKid", "olderKid"],
+    familyMode: "all_together",
+    indoor: false,
+    rainFriendly: false,
+    durationMin: 10,
+    nearby: [
+      "United Kingdom Pavilion",
+      "Yorkshire County Fish Shop",
+      "France Pavilion",
+      "Canada Pavilion"
+    ],
+    tip:
+      "נחמד אם נמצאים באזור UK. לא הייתי הולכת במיוחד מרמי/נורווגיה רק בשביל זה."
+  },
+  {
+    id: "rose-and-crown-pub-musician",
+    name: "Rose & Crown Pub Musician",
+    resort: "Disney",
+    park: "EPCOT",
+    area: "World Showcase",
+    areaId: "world-showcase",
+    category: "show",
+    shortDescription:
+      "מוזיקה חיה באזור Rose & Crown ב־United Kingdom Pavilion.",
+    minHeightCm: null,
+    intensity: "calm",
+    scareFactor: "none",
+    motionSicknessRisk: "low",
+    priority: "skip_if_busy",
+    avgWaitSeptemberMin: null,
+    waitLevelSeptember: "schedule_based",
+    bestTimeToRide: ["evening"],
+    planningNeeded: "check_same_day_hours",
+    skipLine: "None",
+    suitableFor: ["olderKid", "adults"],
+    familyMode: "some_together",
+    indoor: true,
+    rainFriendly: true,
+    durationMin: 15,
+    nearby: [
+      "United Kingdom Pavilion",
+      "Meet Alice in the United Kingdom",
+      "Yorkshire County Fish Shop",
+      "Canada Pavilion"
+    ],
+    tip:
+      "יותר נחמד למבוגרים מאשר לילדים. טוב אם אתם באזור."
+  },
+  {
+    id: "canada-far-and-wide",
+    name: "Canada Far and Wide",
+    resort: "Disney",
+    park: "EPCOT",
+    area: "World Showcase",
+    areaId: "world-showcase",
+    category: "show",
+    shortDescription:
+      "סרט פנורמי על קנדה. ממוזג/מקורה ומתאים להפסקה קצרה.",
+    minHeightCm: null,
+    intensity: "calm",
+    scareFactor: "none",
+    motionSicknessRisk: "low",
+    priority: "skip_if_busy",
+    avgWaitSeptemberMin: 5,
+    waitLevelSeptember: "low",
+    bestTimeToRide: ["midday", "afternoon"],
+    planningNeeded: "check_same_day_hours",
+    skipLine: "None",
+    suitableFor: ["olderKid", "adults"],
+    familyMode: "some_together",
+    indoor: true,
+    rainFriendly: true,
+    durationMin: 15,
+    nearby: [
+      "Canada Pavilion",
+      "United Kingdom Pavilion",
+      "Yorkshire County Fish Shop",
+      "Luminous The Symphony of Us"
+    ],
+    tip:
+      "לא חובה. טוב אם צריך הפסקה באזור קנדה."
+  },
+  {
+    id: "canada-mill-stage-entertainment",
+    name: "Entertainment at Canada Mill Stage",
+    resort: "Disney",
+    park: "EPCOT",
+    area: "World Showcase",
+    areaId: "world-showcase",
+    category: "show",
+    shortDescription:
+      "הופעות חיות משתנות באזור Canada Mill Stage.",
+    minHeightCm: null,
+    intensity: "calm",
+    scareFactor: "none",
+    motionSicknessRisk: "low",
+    priority: "good_if_time",
+    avgWaitSeptemberMin: null,
+    waitLevelSeptember: "schedule_based",
+    bestTimeToRide: ["afternoon", "evening"],
+    planningNeeded: "check_same_day_hours",
+    skipLine: "None",
+    suitableFor: ["youngKid", "olderKid", "adults"],
+    familyMode: "all_together",
+    indoor: false,
+    rainFriendly: false,
+    durationMin: 15,
+    nearby: [
+      "Canada Pavilion",
+      "Canada Far and Wide",
+      "United Kingdom Pavilion",
+      "Luminous The Symphony of Us"
+    ],
+    tip:
+      "לבדוק באפליקציה אם יש הופעה בזמן שאתם באזור."
+  },
+  {
+    id: "meet-asha-world-showcase-plaza",
+    name: "Meet Asha Near World Showcase Plaza",
+    resort: "Disney",
+    park: "EPCOT",
+    area: "World Showcase Plaza",
+    areaId: "world-showcase",
+    category: "character",
+    shortDescription:
+      "מפגש עם אשה מ־Wish ליד World Showcase Plaza, לפי שעות פעילות.",
+    minHeightCm: null,
+    intensity: "calm",
+    scareFactor: "none",
+    motionSicknessRisk: "low",
+    priority: "good_if_time",
+    avgWaitSeptemberMin: 20,
+    waitLevelSeptember: "medium",
+    bestTimeToRide: ["morning", "afternoon"],
+    planningNeeded: "check_same_day_hours",
+    skipLine: "None",
+    suitableFor: ["preschooler", "youngKid", "olderKid"],
+    familyMode: "all_together",
+    indoor: false,
+    rainFriendly: false,
+    durationMin: 10,
+    nearby: [
+      "World Showcase Plaza",
+      "Spaceship Earth",
+      "Journey of Water, Inspired by Moana",
+      "Luminous The Symphony of Us"
+    ],
+    tip:
+      "טוב אם אוהבים Wish או אם אתם עוברים ליד ויש תור קצר."
+  },
+  {
+    id: "meet-star-lord-guardians",
+    name: "Meet Star-Lord Near Guardians of the Galaxy",
+    resort: "Disney",
+    park: "EPCOT",
+    area: "World Discovery",
+    areaId: "world-discovery",
+    category: "character",
+    shortDescription:
+      "מפגש עם Star-Lord ליד Guardians, לפי שעות באותו יום.",
+    minHeightCm: null,
+    intensity: "calm",
+    scareFactor: "none",
+    motionSicknessRisk: "low",
+    priority: "good_if_time",
+    avgWaitSeptemberMin: 15,
+    waitLevelSeptember: "low",
+    bestTimeToRide: ["afternoon"],
+    planningNeeded: "check_same_day_hours",
+    skipLine: "None",
+    suitableFor: ["olderKid", "adults"],
+    familyMode: "some_together",
+    indoor: false,
+    rainFriendly: false,
+    durationMin: 10,
+    nearby: [
+      "Guardians of the Galaxy: Cosmic Rewind",
+      "Mission: SPACE",
+      "Test Track",
+      "Connections Eatery"
+    ],
+    tip:
+      "בעיקר לילדים/מבוגרים שאוהבים Guardians. לא חובה למשפחה כולה."
+  },
+  {
+    id: "bruce-shark-world",
+    name: "Bruce's Shark World",
+    resort: "Disney",
+    park: "EPCOT",
+    area: "World Nature",
+    areaId: "world-nature",
+    category: "experience",
+    shortDescription:
+      "אזור קטן ואינטראקטיבי בתוך The Seas, מתאים לילדים שאוהבים נמו/כרישים.",
+    minHeightCm: null,
+    intensity: "calm",
+    scareFactor: "none",
+    motionSicknessRisk: "low",
+    priority: "good_if_time",
+    avgWaitSeptemberMin: 0,
+    waitLevelSeptember: "low",
+    bestTimeToRide: ["midday", "afternoon"],
+    planningNeeded: "no_reservation",
+    skipLine: "None",
+    suitableFor: ["preschooler", "youngKid"],
+    familyMode: "all_together",
+    indoor: true,
+    rainFriendly: true,
+    durationMin: 10,
+    nearby: [
+      "The Seas with Nemo & Friends",
+      "Turtle Talk With Crush",
+      "SeaBase",
+      "Journey of Water, Inspired by Moana"
+    ],
+    tip:
+      "טוב כשאתם כבר בתוך The Seas וצריכים עוד כמה דקות מזגן."
+  },
+  {
+    id: "manatees",
+    name: "Manatees",
+    resort: "Disney",
+    park: "EPCOT",
+    area: "World Nature",
+    areaId: "world-nature",
+    category: "experience",
+    shortDescription:
+      "תצפית על פרות ים בתוך The Seas. רגוע וממוזג.",
+    minHeightCm: null,
+    intensity: "calm",
+    scareFactor: "none",
+    motionSicknessRisk: "low",
+    priority: "good_if_time",
+    avgWaitSeptemberMin: 0,
+    waitLevelSeptember: "low",
+    bestTimeToRide: ["midday", "afternoon"],
+    planningNeeded: "no_reservation",
+    skipLine: "None",
+    suitableFor: ["preschooler", "youngKid", "olderKid", "adults"],
+    familyMode: "all_together",
+    indoor: true,
+    rainFriendly: true,
+    durationMin: 10,
+    nearby: [
+      "SeaBase",
+      "The Seas with Nemo & Friends",
+      "Turtle Talk With Crush",
+      "Bruce's Shark World"
+    ],
+    tip:
+      "עצירה חמודה ושקטה בתוך The Seas."
+  }
+];
+
+const replaceIds = new Set(updates.map((item) => item.id));
+
+const updatedItems = [
+  ...currentItems.filter((item) => !replaceIds.has(item.id)),
+  ...updates
+].sort(sortItems);
+
+function sortItems(a, b) {
+  const areaOrder = [
+    "world-celebration",
+    "world-discovery",
+    "world-nature",
+    "world-showcase"
+  ];
+
+  const categoryOrder = {
+    ride: 0,
+    show: 1,
+    character: 2,
+    experience: 3,
+    dining: 4
+  };
+
+  const priorityOrder = {
+    must_do: 0,
+    good_if_time: 1,
+    skip_if_busy: 2
+  };
+
+  const areaA = areaOrder.indexOf(a.areaId);
+  const areaB = areaOrder.indexOf(b.areaId);
+
+  if (areaA !== areaB) return areaA - areaB;
+
+  const priorityA = priorityOrder[a.priority] ?? 99;
+  const priorityB = priorityOrder[b.priority] ?? 99;
+
+  if (priorityA !== priorityB) return priorityA - priorityB;
+
+  const categoryA = categoryOrder[a.category] ?? 99;
+  const categoryB = categoryOrder[b.category] ?? 99;
+
+  if (categoryA !== categoryB) return categoryA - categoryB;
+
+  return a.name.localeCompare(b.name);
+}
+
+const content = `export const epcotAttractions = ${JSON.stringify(
+  updatedItems,
+  null,
+  2
+)};
+`;
+
+fs.writeFileSync(attractionsPath, content, "utf8");
+
+console.log("Updated EPCOT entertainment and characters.");
+console.log(`Total EPCOT attraction/entertainment items: ${updatedItems.length}`);

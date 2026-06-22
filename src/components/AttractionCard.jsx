@@ -15,6 +15,7 @@ export default function AttractionCard({ attraction }) {
   }, []);
 
   const isDone = !!doneItems[attraction.id];
+  const isDining = attraction.category === "dining";
 
   function toggleDone() {
     const next = {
@@ -25,11 +26,6 @@ export default function AttractionCard({ attraction }) {
     setDoneItems(next);
     localStorage.setItem(DONE_STORAGE_KEY, JSON.stringify(next));
   }
-
-  const heightText =
-    attraction.minHeightCm == null
-      ? "ללא מגבלת גובה"
-      : `${attraction.minHeightCm} ס״מ`;
 
   return (
     <article className={`card ${isDone ? "done-card" : ""}`}>
@@ -67,120 +63,11 @@ export default function AttractionCard({ attraction }) {
 
       {attraction.shortDescription && <p>{attraction.shortDescription}</p>}
 
-      <div className="info-grid">
-        <div>
-          <strong>גובה:</strong> {heightText}
-        </div>
-
-        {attraction.avgWaitSeptemberMin != null && (
-          <div>
-            <strong>המתנה בספטמבר:</strong>{" "}
-            כ־{attraction.avgWaitSeptemberMin} דק׳
-          </div>
-        )}
-
-        {attraction.durationMin != null && (
-          <div>
-            <strong>משך:</strong> כ־{attraction.durationMin} דק׳
-          </div>
-        )}
-
-        {attraction.duration && (
-          <div>
-            <strong>משך:</strong> {attraction.duration}
-          </div>
-        )}
-
-        {attraction.intensity && (
-          <div>
-            <strong>אינטנסיביות:</strong>{" "}
-            {labelIntensity(attraction.intensity)}
-          </div>
-        )}
-
-        {attraction.scareFactor && (
-          <div>
-            <strong>מפחיד:</strong> {labelScare(attraction.scareFactor)}
-          </div>
-        )}
-
-        {attraction.motionSicknessRisk && (
-          <div>
-            <strong>בחילה/סחרחורת:</strong>{" "}
-            {labelRisk(attraction.motionSicknessRisk)}
-          </div>
-        )}
-
-        {attraction.priority && (
-          <div>
-            <strong>עדיפות:</strong> {labelPriority(attraction.priority)}
-          </div>
-        )}
-
-        {attraction.skipLine && (
-          <div>
-            <strong>קיצור תור:</strong> {attraction.skipLine}
-          </div>
-        )}
-
-        {attraction.planningNeeded && (
-          <div>
-            <strong>תכנון:</strong> {labelPlanning(attraction.planningNeeded)}
-          </div>
-        )}
-
-        {attraction.familyMode && (
-          <div>
-            <strong>משפחתי:</strong> {labelFamilyMode(attraction.familyMode)}
-          </div>
-        )}
-
-        {attraction.indoor != null && (
-          <div>
-            <strong>מקורה/ממוזג:</strong> {attraction.indoor ? "כן" : "לא"}
-          </div>
-        )}
-
-        {attraction.rainFriendly != null && (
-          <div>
-            <strong>מתאים לגשם:</strong>{" "}
-            {attraction.rainFriendly ? "כן" : "לא"}
-          </div>
-        )}
-
-        {attraction.rainyDay != null && (
-          <div>
-            <strong>יום גשום:</strong>{" "}
-            {attraction.rainyDay ? "מתאים" : "פחות מתאים"}
-          </div>
-        )}
-
-        {attraction.bookingNeeded != null && (
-          <div>
-            <strong>הזמנה מראש:</strong>{" "}
-            {attraction.bookingNeeded ? "מומלץ/נדרש" : "לא נדרש"}
-          </div>
-        )}
-
-        {attraction.energyLevel && (
-          <div>
-            <strong>מאמץ:</strong> {labelEnergy(attraction.energyLevel)}
-          </div>
-        )}
-
-        {attraction.diningType && (
-          <div>
-            <strong>סוג אוכל:</strong> {labelDiningType(attraction.diningType)}
-          </div>
-        )}
-
-        {attraction.mobileOrder != null && (
-          <div>
-            <strong>Mobile Order:</strong>{" "}
-            {attraction.mobileOrder ? "כן" : "לא"}
-          </div>
-        )}
-      </div>
+      {isDining ? (
+        <DiningInfo attraction={attraction} />
+      ) : (
+        <AttractionInfo attraction={attraction} />
+      )}
 
       {attraction.suitableFor?.length > 0 && (
         <div className="nearby-box">
@@ -195,7 +82,7 @@ export default function AttractionCard({ attraction }) {
 
       {attraction.bestTimeToRide?.length > 0 && (
         <div className="nearby-box">
-          <strong>זמן מומלץ:</strong>
+          <strong>{isDining ? "זמן מתאים:" : "זמן מומלץ:"}</strong>
           <div className="nearby-list">
             {attraction.bestTimeToRide.map((time) => (
               <span key={time}>{labelBestTime(time)}</span>
@@ -217,6 +104,165 @@ export default function AttractionCard({ attraction }) {
 
       {attraction.tip && <p className="tip">טיפ: {attraction.tip}</p>}
     </article>
+  );
+}
+
+function AttractionInfo({ attraction }) {
+  const heightText =
+    attraction.minHeightCm == null
+      ? "ללא מגבלת גובה"
+      : `${attraction.minHeightCm} ס״מ`;
+
+  return (
+    <div className="info-grid">
+      <div>
+        <strong>גובה:</strong> {heightText}
+      </div>
+
+      {attraction.avgWaitSeptemberMin != null && (
+        <div>
+          <strong>המתנה בספטמבר:</strong> כ־{attraction.avgWaitSeptemberMin} דק׳
+        </div>
+      )}
+
+      {attraction.durationMin != null && (
+        <div>
+          <strong>משך:</strong> כ־{attraction.durationMin} דק׳
+        </div>
+      )}
+
+      {attraction.duration && (
+        <div>
+          <strong>משך:</strong> {attraction.duration}
+        </div>
+      )}
+
+      {attraction.intensity && (
+        <div>
+          <strong>אינטנסיביות:</strong> {labelIntensity(attraction.intensity)}
+        </div>
+      )}
+
+      {attraction.scareFactor && (
+        <div>
+          <strong>מפחיד:</strong> {labelScare(attraction.scareFactor)}
+        </div>
+      )}
+
+      {attraction.motionSicknessRisk && (
+        <div>
+          <strong>בחילה/סחרחורת:</strong>{" "}
+          {labelRisk(attraction.motionSicknessRisk)}
+        </div>
+      )}
+
+      {attraction.priority && (
+        <div>
+          <strong>עדיפות:</strong> {labelPriority(attraction.priority)}
+        </div>
+      )}
+
+      {attraction.skipLine && (
+        <div>
+          <strong>קיצור תור:</strong> {attraction.skipLine}
+        </div>
+      )}
+
+      {attraction.planningNeeded && (
+        <div>
+          <strong>תכנון:</strong> {labelPlanning(attraction.planningNeeded)}
+        </div>
+      )}
+
+      {attraction.familyMode && (
+        <div>
+          <strong>משפחתי:</strong> {labelFamilyMode(attraction.familyMode)}
+        </div>
+      )}
+
+      {attraction.indoor != null && (
+        <div>
+          <strong>מקורה/ממוזג:</strong> {attraction.indoor ? "כן" : "לא"}
+        </div>
+      )}
+
+      {attraction.rainFriendly != null && (
+        <div>
+          <strong>מתאים לגשם:</strong>{" "}
+          {attraction.rainFriendly ? "כן" : "לא"}
+        </div>
+      )}
+    </div>
+  );
+}
+
+function DiningInfo({ attraction }) {
+  return (
+    <div className="info-grid">
+      {attraction.diningType && (
+        <div>
+          <strong>סוג:</strong> {labelDiningType(attraction.diningType)}
+        </div>
+      )}
+
+      {attraction.mealUse && (
+        <div>
+          <strong>שימוש:</strong> {labelMealUse(attraction.mealUse)}
+        </div>
+      )}
+
+      {attraction.foodStyle && (
+        <div>
+          <strong>סגנון:</strong> {labelFoodStyle(attraction.foodStyle)}
+        </div>
+      )}
+
+      {attraction.kidsFriendly != null && (
+        <div>
+          <strong>מתאים לילדים:</strong>{" "}
+          {attraction.kidsFriendly ? "כן" : "פחות"}
+        </div>
+      )}
+
+      {attraction.mobileOrder != null && (
+        <div>
+          <strong>Mobile Order:</strong>{" "}
+          {attraction.mobileOrder ? "כן" : "לא"}
+        </div>
+      )}
+
+      {attraction.reservationNeeded != null && (
+        <div>
+          <strong>הזמנה מראש:</strong>{" "}
+          {attraction.reservationNeeded ? "מומלץ/נדרש" : "לא נדרש"}
+        </div>
+      )}
+
+      {attraction.durationMin != null && (
+        <div>
+          <strong>זמן משוער:</strong> כ־{attraction.durationMin} דק׳
+        </div>
+      )}
+
+      {attraction.priority && (
+        <div>
+          <strong>עדיפות:</strong> {labelPriority(attraction.priority)}
+        </div>
+      )}
+
+      {attraction.indoor != null && (
+        <div>
+          <strong>מקורה/ממוזג:</strong> {attraction.indoor ? "כן" : "לא"}
+        </div>
+      )}
+
+      {attraction.rainFriendly != null && (
+        <div>
+          <strong>מתאים לגשם:</strong>{" "}
+          {attraction.rainFriendly ? "כן" : "לא"}
+        </div>
+      )}
+    </div>
   );
 }
 
@@ -273,9 +319,9 @@ function labelRisk(value) {
 
 function labelPriority(value) {
   const labels = {
-    must_do: "חובה",
-    good_if_time: "אם יש זמן",
-    skip_if_busy: "לדלג אם עמוס",
+    must_do: "מומלץ מאוד",
+    good_if_time: "אם מסתדר",
+    skip_if_busy: "לא חובה",
   };
 
   return labels[value] || value;
@@ -348,6 +394,37 @@ function labelDiningType(value) {
     quick_service: "Quick Service",
     table_service: "Table Service",
     snack: "נשנוש",
+  };
+
+  return labels[value] || value;
+}
+
+function labelMealUse(value) {
+  const labels = {
+    real_meal: "ארוחה",
+    snack: "נשנוש",
+    dessert: "קינוח",
+    sit_down: "ארוחה בישיבה",
+    emergency_kids_food: "פתרון מהיר לילדים",
+  };
+
+  return labels[value] || value;
+}
+
+function labelFoodStyle(value) {
+  const labels = {
+    fresh_quick: "יחסית טרי ומהיר",
+    quick_varied: "מהיר ומגוון",
+    kids_food: "אוכל ילדים",
+    emergency_kids_food: "פתרון ילדים מהיר",
+    quick_service: "Quick Service",
+    mexican_quick: "מקסיקני מהיר",
+    asian_quick: "אסייתי מהיר",
+    bbq: "BBQ",
+    bakery: "מאפייה",
+    dessert: "קינוח",
+    snack: "נשנוש",
+    fish_and_chips: "פיש אנד צ׳יפס",
   };
 
   return labels[value] || value;
