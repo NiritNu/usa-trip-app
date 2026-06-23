@@ -11,7 +11,7 @@ export default function App() {
   return (
     <div className="app-shell">
       <header className="app-header">
-        <div className="header-badge">✈️ משפחת הופר בארה״ב</div>
+        <div className="header-badge">✈️ טיול משפחתי בארה״ב</div>
         <h1>USA Trip App</h1>
         <p>🗽 ניו יורק · 🏰 דיסני · 🎢 יוניברסל</p>
       </header>

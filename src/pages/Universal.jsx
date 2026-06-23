@@ -3,24 +3,33 @@ import AttractionCard from "../components/AttractionCard.jsx";
 import { universalParks } from "../data/universal/index.js";
 
 const categoryFilters = [
-  { id: "all", label: "הכול" },
-  { id: "ride", label: "מתקנים" },
-  { id: "show", label: "הופעות" },
-  { id: "character", label: "דמויות" },
-  { id: "dining", label: "אוכל" },
-  { id: "experience", label: "חוויות" },
+  { id: "all", label: "✨ הכול" },
+  { id: "ride", label: "🎢 מתקנים" },
+  { id: "show", label: "🎭 הופעות" },
+  { id: "character", label: "👋 דמויות" },
+  { id: "dining", label: "🍔 אוכל" },
+  { id: "experience", label: "🪄 חוויות" },
 ];
 
 const needFilters = [
-  { id: "all", label: "הכול" },
-  { id: "must_do", label: "חובה" },
-  { id: "express_use", label: "כדאי להשתמש ב-Express" },
-  { id: "indoor", label: "צריך מזגן" },
-  { id: "no_height", label: "ללא מגבלת גובה" },
-  { id: "low_wait", label: "תור קצר יחסית" },
-  { id: "all_together", label: "מתאים לכולם" },
-  { id: "older_kids", label: "רק הגדולים" },
-  { id: "rain", label: "גשם" },
+  { id: "all", label: "✨ הכול" },
+  { id: "must_do", label: "⭐ חובה" },
+  { id: "express_use", label: "⚡ כדאי Express" },
+  { id: "indoor", label: "❄️ מזגן" },
+  { id: "no_height", label: "📏 ללא גובה" },
+  { id: "low_wait", label: "⏱️ תור קצר" },
+  { id: "all_together", label: "👨‍👩‍👧‍👦 כולם יחד" },
+  { id: "older_kids", label: "🧑 לגדולים" },
+  { id: "rain", label: "🌧️ גשם" },
+];
+
+const moodFilters = [
+  { id: "all", label: "😊 רגיל" },
+  { id: "tired", label: "😴 עייפים" },
+  { id: "hot", label: "🔥 חם" },
+  { id: "rainy", label: "🌧️ גשם" },
+  { id: "little_kids", label: "👧 ילדים קטנים" },
+  { id: "thrill", label: "🎢 אקסטרים" },
 ];
 
 export default function Universal() {
@@ -30,6 +39,7 @@ export default function Universal() {
   const [selectedAreaId, setSelectedAreaId] = useState("all");
   const [activeCategory, setActiveCategory] = useState("all");
   const [activeNeed, setActiveNeed] = useState("all");
+  const [activeMood, setActiveMood] = useState("all");
 
   const selectedPark =
     universalParks.find((park) => park.id === selectedParkId) ||
@@ -40,17 +50,12 @@ export default function Universal() {
 
   const filteredItems = useMemo(() => {
     return items
-      .filter((item) => {
-        if (selectedAreaId === "all") return true;
-        return item.areaId === selectedAreaId;
-      })
-      .filter((item) => {
-        if (activeCategory === "all") return true;
-        return item.category === activeCategory;
-      })
+      .filter((item) => selectedAreaId === "all" || item.areaId === selectedAreaId)
+      .filter((item) => activeCategory === "all" || item.category === activeCategory)
       .filter((item) => matchesNeed(item, activeNeed))
+      .filter((item) => matchesMood(item, activeMood))
       .sort(sortItems);
-  }, [items, selectedAreaId, activeCategory, activeNeed]);
+  }, [items, selectedAreaId, activeCategory, activeNeed, activeMood]);
 
   const selectedArea =
     selectedAreaId === "all"
@@ -60,22 +65,21 @@ export default function Universal() {
   const hasParkContent = items.length > 0;
 
   const diningItems = filteredItems.filter((item) => item.category === "dining");
-  const nonDiningItems = filteredItems.filter(
-    (item) => item.category !== "dining"
-  );
+  const nonDiningItems = filteredItems.filter((item) => item.category !== "dining");
 
   return (
     <main className="page">
-      <h1 className="page-title">Universal</h1>
+      <h1 className="page-title">🎢 Universal</h1>
 
       <p className="page-description">
-        בחרי פארק, אזור וסוג פעילות. בפארקים הוותיקים יש לכם Express Unlimited דרך המלון. הכפתור “כדאי להשתמש ב-Express” מציג רק מתקנים שבהם באמת שווה לנצל אותו.
+        בחרי פארק, אזור ומצב רוח. בפארקים הוותיקים יש Express Unlimited;
+        ב־Epic Universe התנאים שונים ומסומנים בכרטיסים.
       </p>
 
-      <section className="card">
-        <h3>פארק</h3>
+      <section className="card playful-panel">
+        <h3>🌎 איזה פארק?</h3>
 
-        <div className="tabs-row">
+        <div className="tabs-row park-tabs">
           {universalParks.map((park) => (
             <button
               key={park.id}
@@ -86,17 +90,18 @@ export default function Universal() {
                 setSelectedAreaId("all");
                 setActiveCategory("all");
                 setActiveNeed("all");
+                setActiveMood("all");
               }}
             >
-              {park.name}
+              {parkIcon(park)} {park.name}
             </button>
           ))}
         </div>
       </section>
 
       {areas.length > 0 && (
-        <section className="card">
-          <h3>איפה אתם עכשיו?</h3>
+        <section className="card playful-panel">
+          <h3>📍 איפה אתם עכשיו?</h3>
 
           <div className="tabs-row">
             <button
@@ -104,7 +109,7 @@ export default function Universal() {
               className={selectedAreaId === "all" ? "active" : ""}
               onClick={() => setSelectedAreaId("all")}
             >
-              כל הפארק
+              🗺️ כל הפארק
             </button>
 
             {areas.map((area) => (
@@ -122,14 +127,14 @@ export default function Universal() {
           {selectedArea && (
             <p className="meta">
               אזור נבחר: {selectedArea.name}
-              {selectedArea.hebrewName ? ` · ${selectedArea.hebrewName}` : ""}
+              {selectedArea.hebrewName ? " · " + selectedArea.hebrewName : ""}
             </p>
           )}
         </section>
       )}
 
-      <section className="card">
-        <h3>מה לראות באזור?</h3>
+      <section className="card playful-panel">
+        <h3>🎯 מה מחפשים?</h3>
 
         <div className="filter-bar">
           {categoryFilters.map((filter) => (
@@ -145,8 +150,8 @@ export default function Universal() {
         </div>
       </section>
 
-      <section className="card">
-        <h3>מה צריך עכשיו?</h3>
+      <section className="card playful-panel">
+        <h3>🧭 מה חשוב עכשיו?</h3>
 
         <div className="filter-bar">
           {needFilters.map((filter) => (
@@ -162,18 +167,35 @@ export default function Universal() {
         </div>
       </section>
 
-      <section className="card">
+      <section className="card playful-panel mood-card">
+        <h3>🎈 מצב רוח משפחתי</h3>
+
+        <div className="filter-bar mood-bar">
+          {moodFilters.map((filter) => (
+            <button
+              key={filter.id}
+              type="button"
+              className={activeMood === filter.id ? "active" : ""}
+              onClick={() => setActiveMood(filter.id)}
+            >
+              {filter.label}
+            </button>
+          ))}
+        </div>
+      </section>
+
+      <section className="card results-card">
         <div className="card-header">
           <div>
-            <h3>תוצאות</h3>
+            <h3>✨ תוצאות</h3>
             <p className="meta">
-              {selectedPark?.name}
+              {parkIcon(selectedPark)} {selectedPark?.name || "Universal"}
               {" · "}
               {selectedArea ? selectedArea.name : "כל הפארק"}
               {" · "}
               {labelCategory(activeCategory)}
               {" · "}
-              {labelNeed(activeNeed)}
+              {labelMood(activeMood)}
             </p>
           </div>
 
@@ -182,7 +204,7 @@ export default function Universal() {
 
         {!hasParkContent && (
           <div className="empty-state">
-            הפארק הזה כבר קיים במבנה האפליקציה, אבל עוד לא הכנסנו אליו תוכן.
+            הפארק הזה כבר קיים במבנה, אבל עוד לא הכנסנו אליו תוכן.
           </div>
         )}
 
@@ -195,7 +217,7 @@ export default function Universal() {
 
       {diningItems.length > 0 && (
         <>
-          <h2 className="page-title small-title">אוכל קרוב</h2>
+          <h2 className="page-title small-title">🍔 אוכל קרוב</h2>
 
           <div className="cards-list">
             {diningItems.map((item) => (
@@ -207,7 +229,7 @@ export default function Universal() {
 
       {nonDiningItems.length > 0 && (
         <>
-          <h2 className="page-title small-title">דברים לעשות</h2>
+          <h2 className="page-title small-title">🎢 דברים לעשות</h2>
 
           <div className="cards-list">
             {nonDiningItems.map((item) => (
@@ -231,15 +253,43 @@ function matchesNeed(item, need) {
     return item.avgWaitSeptemberMin != null && item.avgWaitSeptemberMin <= 25;
   }
 
-  if (need === "all_together") {
-    return item.familyMode === "all_together";
-  }
-
-  if (need === "older_kids") {
-    return item.suitableFor?.includes("olderKid");
-  }
-
+  if (need === "all_together") return item.familyMode === "all_together";
+  if (need === "older_kids") return item.suitableFor?.includes("olderKid");
   if (need === "rain") return item.rainFriendly === true;
+
+  return true;
+}
+
+function matchesMood(item, mood) {
+  if (mood === "all") return true;
+
+  if (mood === "tired") {
+    return (
+      item.indoor === true ||
+      item.intensity === "calm" ||
+      item.category === "show" ||
+      item.category === "dining"
+    );
+  }
+
+  if (mood === "hot") {
+    return item.indoor === true || item.category === "dining";
+  }
+
+  if (mood === "rainy") {
+    return item.rainFriendly === true;
+  }
+
+  if (mood === "little_kids") {
+    return (
+      item.suitableFor?.includes("preschooler") ||
+      item.suitableFor?.includes("youngKid")
+    );
+  }
+
+  if (mood === "thrill") {
+    return item.intensity === "thrill" || item.scareFactor === "high";
+  }
 
   return true;
 }
@@ -277,6 +327,17 @@ function sortItems(a, b) {
   return a.name.localeCompare(b.name);
 }
 
+function parkIcon(park) {
+  const id = park?.id || "";
+  const name = park?.name || "";
+
+  if (id.includes("universal-studios") || name.includes("Universal Studios")) return "🎥";
+  if (id.includes("islands") || name.includes("Islands")) return "🧙";
+  if (id.includes("epic") || name.includes("Epic")) return "⭐";
+
+  return "🎢";
+}
+
 function labelCategory(value) {
   const labels = {
     all: "הכול",
@@ -290,17 +351,14 @@ function labelCategory(value) {
   return labels[value] || value;
 }
 
-function labelNeed(value) {
+function labelMood(value) {
   const labels = {
-    all: "הכול",
-    must_do: "חובה",
-    express_use: "כדאי להשתמש ב-Express",
-    indoor: "צריך מזגן",
-    no_height: "ללא מגבלת גובה",
-    low_wait: "תור קצר יחסית",
-    all_together: "מתאים לכולם",
-    older_kids: "רק הגדולים",
-    rain: "גשם",
+    all: "רגיל",
+    tired: "עייפים",
+    hot: "חם",
+    rainy: "גשם",
+    little_kids: "ילדים קטנים",
+    thrill: "אקסטרים",
   };
 
   return labels[value] || value;

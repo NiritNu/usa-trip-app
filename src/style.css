@@ -504,3 +504,48 @@ button {
     align-items: flex-start;
   }
 }
+/* Playful stage 2 */
+.playful-panel {
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(248, 250, 252, 0.94));
+}
+
+.playful-panel h3,
+.results-card h3 {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.park-tabs button {
+  font-weight: 800;
+}
+
+.mood-card {
+  border-color: #fecdd3;
+  background:
+    radial-gradient(circle at top left, rgba(254, 205, 211, 0.5), transparent 34%),
+    rgba(255, 255, 255, 0.97);
+}
+
+.mood-bar button {
+  border-color: #fbcfe8;
+}
+
+.mood-bar button:hover {
+  background: #fdf2f8;
+  border-color: #f9a8d4;
+}
+
+.mood-bar button.active {
+  background: linear-gradient(135deg, #ec4899 0%, #f97316 100%);
+  color: white;
+  border-color: transparent;
+}
+
+.results-card {
+  border-color: #bfdbfe;
+  background:
+    radial-gradient(circle at top right, rgba(191, 219, 254, 0.55), transparent 32%),
+    rgba(255, 255, 255, 0.97);
+}
