@@ -8,7 +8,11 @@ export const islandsOfAdventureAreas = [
     "nearbyAreas": [
       "seuss-landing",
       "marvel-super-hero-island"
-    ]
+    ],
+    "mapPosition": {
+      "x": 50,
+      "y": 84
+    }
   },
   {
     "id": "seuss-landing",
@@ -19,7 +23,11 @@ export const islandsOfAdventureAreas = [
     "nearbyAreas": [
       "port-of-entry",
       "lost-continent"
-    ]
+    ],
+    "mapPosition": {
+      "x": 67,
+      "y": 70
+    }
   },
   {
     "id": "marvel-super-hero-island",
@@ -30,7 +38,11 @@ export const islandsOfAdventureAreas = [
     "nearbyAreas": [
       "port-of-entry",
       "toon-lagoon"
-    ]
+    ],
+    "mapPosition": {
+      "x": 28,
+      "y": 68
+    }
   },
   {
     "id": "toon-lagoon",
@@ -41,7 +53,11 @@ export const islandsOfAdventureAreas = [
     "nearbyAreas": [
       "marvel-super-hero-island",
       "skull-island"
-    ]
+    ],
+    "mapPosition": {
+      "x": 25,
+      "y": 50
+    }
   },
   {
     "id": "skull-island",
@@ -52,7 +68,11 @@ export const islandsOfAdventureAreas = [
     "nearbyAreas": [
       "toon-lagoon",
       "jurassic-park"
-    ]
+    ],
+    "mapPosition": {
+      "x": 29,
+      "y": 31
+    }
   },
   {
     "id": "jurassic-park",
@@ -63,7 +83,11 @@ export const islandsOfAdventureAreas = [
     "nearbyAreas": [
       "skull-island",
       "hogsmeade"
-    ]
+    ],
+    "mapPosition": {
+      "x": 47,
+      "y": 27
+    }
   },
   {
     "id": "hogsmeade",
@@ -74,7 +98,11 @@ export const islandsOfAdventureAreas = [
     "nearbyAreas": [
       "jurassic-park",
       "lost-continent"
-    ]
+    ],
+    "mapPosition": {
+      "x": 67,
+      "y": 29
+    }
   },
   {
     "id": "lost-continent",
@@ -85,6 +113,10 @@ export const islandsOfAdventureAreas = [
     "nearbyAreas": [
       "hogsmeade",
       "seuss-landing"
-    ]
+    ],
+    "mapPosition": {
+      "x": 72,
+      "y": 50
+    }
   }
 ];

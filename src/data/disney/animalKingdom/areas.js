@@ -7,7 +7,11 @@ export const animalKingdomAreas = [
     "resort": "Disney",
     "nearbyAreas": [
       "discovery-island"
-    ]
+    ],
+    "mapPosition": {
+      "x": 50,
+      "y": 82
+    }
   },
   {
     "id": "discovery-island",
@@ -20,7 +24,11 @@ export const animalKingdomAreas = [
       "pandora",
       "africa",
       "asia"
-    ]
+    ],
+    "mapPosition": {
+      "x": 50,
+      "y": 58
+    }
   },
   {
     "id": "pandora",
@@ -31,7 +39,11 @@ export const animalKingdomAreas = [
     "nearbyAreas": [
       "discovery-island",
       "africa"
-    ]
+    ],
+    "mapPosition": {
+      "x": 26,
+      "y": 43
+    }
   },
   {
     "id": "africa",
@@ -43,7 +55,11 @@ export const animalKingdomAreas = [
       "discovery-island",
       "pandora",
       "asia"
-    ]
+    ],
+    "mapPosition": {
+      "x": 43,
+      "y": 28
+    }
   },
   {
     "id": "asia",
@@ -54,7 +70,11 @@ export const animalKingdomAreas = [
     "nearbyAreas": [
       "discovery-island",
       "africa"
-    ]
+    ],
+    "mapPosition": {
+      "x": 73,
+      "y": 43
+    }
   },
   {
     "id": "rafikis-planet-watch",
@@ -64,6 +84,10 @@ export const animalKingdomAreas = [
     "resort": "Disney",
     "nearbyAreas": [
       "africa"
-    ]
+    ],
+    "mapPosition": {
+      "x": 42,
+      "y": 13
+    }
   }
 ];

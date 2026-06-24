@@ -9,7 +9,11 @@ export const magicKingdomAreas = [
       "adventureland",
       "fantasyland",
       "tomorrowland"
-    ]
+    ],
+    "mapPosition": {
+      "x": 50,
+      "y": 78
+    }
   },
   {
     "id": "adventureland",
@@ -20,7 +24,11 @@ export const magicKingdomAreas = [
     "nearbyAreas": [
       "main-street",
       "frontierland"
-    ]
+    ],
+    "mapPosition": {
+      "x": 27,
+      "y": 58
+    }
   },
   {
     "id": "frontierland",
@@ -31,7 +39,11 @@ export const magicKingdomAreas = [
     "nearbyAreas": [
       "adventureland",
       "liberty-square"
-    ]
+    ],
+    "mapPosition": {
+      "x": 27,
+      "y": 40
+    }
   },
   {
     "id": "liberty-square",
@@ -42,7 +54,11 @@ export const magicKingdomAreas = [
     "nearbyAreas": [
       "frontierland",
       "fantasyland"
-    ]
+    ],
+    "mapPosition": {
+      "x": 43,
+      "y": 40
+    }
   },
   {
     "id": "fantasyland",
@@ -54,7 +70,11 @@ export const magicKingdomAreas = [
       "liberty-square",
       "storybook-circus",
       "tomorrowland"
-    ]
+    ],
+    "mapPosition": {
+      "x": 56,
+      "y": 28
+    }
   },
   {
     "id": "storybook-circus",
@@ -65,7 +85,11 @@ export const magicKingdomAreas = [
     "nearbyAreas": [
       "fantasyland",
       "tomorrowland"
-    ]
+    ],
+    "mapPosition": {
+      "x": 73,
+      "y": 24
+    }
   },
   {
     "id": "tomorrowland",
@@ -77,6 +101,10 @@ export const magicKingdomAreas = [
       "main-street",
       "fantasyland",
       "storybook-circus"
-    ]
+    ],
+    "mapPosition": {
+      "x": 75,
+      "y": 54
+    }
   }
 ];

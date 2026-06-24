@@ -9,7 +9,11 @@ export const universalStudiosAreas = [
       "new-york",
       "dreamworks-land",
       "hollywood"
-    ]
+    ],
+    "mapPosition": {
+      "x": 29,
+      "y": 75
+    }
   },
   {
     "id": "new-york",
@@ -21,7 +25,11 @@ export const universalStudiosAreas = [
       "production-central",
       "san-francisco",
       "hollywood"
-    ]
+    ],
+    "mapPosition": {
+      "x": 42,
+      "y": 45
+    }
   },
   {
     "id": "san-francisco",
@@ -32,7 +40,11 @@ export const universalStudiosAreas = [
     "nearbyAreas": [
       "new-york",
       "the-wizarding-world-diagon-alley"
-    ]
+    ],
+    "mapPosition": {
+      "x": 61,
+      "y": 45
+    }
   },
   {
     "id": "the-wizarding-world-diagon-alley",
@@ -43,7 +55,11 @@ export const universalStudiosAreas = [
     "nearbyAreas": [
       "san-francisco",
       "world-expo"
-    ]
+    ],
+    "mapPosition": {
+      "x": 78,
+      "y": 40
+    }
   },
   {
     "id": "world-expo",
@@ -54,7 +70,11 @@ export const universalStudiosAreas = [
     "nearbyAreas": [
       "the-wizarding-world-diagon-alley",
       "springfield"
-    ]
+    ],
+    "mapPosition": {
+      "x": 88,
+      "y": 58
+    }
   },
   {
     "id": "springfield",
@@ -65,7 +85,11 @@ export const universalStudiosAreas = [
     "nearbyAreas": [
       "world-expo",
       "woody-woodpecker"
-    ]
+    ],
+    "mapPosition": {
+      "x": 65,
+      "y": 68
+    }
   },
   {
     "id": "dreamworks-land",
@@ -76,7 +100,11 @@ export const universalStudiosAreas = [
     "nearbyAreas": [
       "production-central",
       "hollywood"
-    ]
+    ],
+    "mapPosition": {
+      "x": 53,
+      "y": 83
+    }
   },
   {
     "id": "hollywood",
@@ -88,6 +116,10 @@ export const universalStudiosAreas = [
       "production-central",
       "new-york",
       "dreamworks-land"
-    ]
+    ],
+    "mapPosition": {
+      "x": 30,
+      "y": 88
+    }
   }
 ];

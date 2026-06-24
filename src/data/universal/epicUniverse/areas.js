@@ -10,7 +10,11 @@ export const epicUniverseAreas = [
       "dark-universe",
       "isle-of-berk",
       "ministry-of-magic"
-    ]
+    ],
+    "mapPosition": {
+      "x": 50,
+      "y": 50
+    }
   },
   {
     "id": "super-nintendo-world",
@@ -20,7 +24,11 @@ export const epicUniverseAreas = [
     "resort": "Universal",
     "nearbyAreas": [
       "celestial-park"
-    ]
+    ],
+    "mapPosition": {
+      "x": 20,
+      "y": 66
+    }
   },
   {
     "id": "dark-universe",
@@ -30,7 +38,11 @@ export const epicUniverseAreas = [
     "resort": "Universal",
     "nearbyAreas": [
       "celestial-park"
-    ]
+    ],
+    "mapPosition": {
+      "x": 24,
+      "y": 24
+    }
   },
   {
     "id": "isle-of-berk",
@@ -40,7 +52,11 @@ export const epicUniverseAreas = [
     "resort": "Universal",
     "nearbyAreas": [
       "celestial-park"
-    ]
+    ],
+    "mapPosition": {
+      "x": 75,
+      "y": 70
+    }
   },
   {
     "id": "ministry-of-magic",
@@ -50,6 +66,10 @@ export const epicUniverseAreas = [
     "resort": "Universal",
     "nearbyAreas": [
       "celestial-park"
-    ]
+    ],
+    "mapPosition": {
+      "x": 75,
+      "y": 24
+    }
   }
 ];

@@ -1,5 +1,6 @@
 import { useMemo, useState } from "react";
 import AttractionCard from "../components/AttractionCard.jsx";
+import RealParkMap from "../components/RealParkMap.jsx";
 import { disneyParks } from "../data/index.js";
 
 const categoryFilters = [
@@ -95,6 +96,13 @@ export default function Disney() {
           ))}
         </div>
       </section>
+
+      <RealParkMap
+        park={selectedPark}
+        areas={areas}
+        selectedAreaId={selectedAreaId}
+        onSelectArea={setSelectedAreaId}
+      />
 
       {areas.length > 0 && (
         <section className="card playful-panel">

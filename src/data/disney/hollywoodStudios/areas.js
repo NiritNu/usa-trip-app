@@ -9,7 +9,11 @@ export const hollywoodStudiosAreas = [
       "echo-lake",
       "animation-courtyard",
       "sunset-boulevard"
-    ]
+    ],
+    "mapPosition": {
+      "x": 50,
+      "y": 18
+    }
   },
   {
     "id": "echo-lake",
@@ -21,7 +25,11 @@ export const hollywoodStudiosAreas = [
       "hollywood-boulevard",
       "grand-avenue",
       "animation-courtyard"
-    ]
+    ],
+    "mapPosition": {
+      "x": 39,
+      "y": 39
+    }
   },
   {
     "id": "grand-avenue",
@@ -32,7 +40,11 @@ export const hollywoodStudiosAreas = [
     "nearbyAreas": [
       "echo-lake",
       "star-wars-galaxys-edge"
-    ]
+    ],
+    "mapPosition": {
+      "x": 30,
+      "y": 58
+    }
   },
   {
     "id": "star-wars-galaxys-edge",
@@ -43,7 +55,11 @@ export const hollywoodStudiosAreas = [
     "nearbyAreas": [
       "grand-avenue",
       "toy-story-land"
-    ]
+    ],
+    "mapPosition": {
+      "x": 26,
+      "y": 78
+    }
   },
   {
     "id": "toy-story-land",
@@ -54,7 +70,11 @@ export const hollywoodStudiosAreas = [
     "nearbyAreas": [
       "star-wars-galaxys-edge",
       "animation-courtyard"
-    ]
+    ],
+    "mapPosition": {
+      "x": 58,
+      "y": 70
+    }
   },
   {
     "id": "animation-courtyard",
@@ -66,7 +86,11 @@ export const hollywoodStudiosAreas = [
       "hollywood-boulevard",
       "toy-story-land",
       "sunset-boulevard"
-    ]
+    ],
+    "mapPosition": {
+      "x": 62,
+      "y": 45
+    }
   },
   {
     "id": "sunset-boulevard",
@@ -77,6 +101,10 @@ export const hollywoodStudiosAreas = [
     "nearbyAreas": [
       "hollywood-boulevard",
       "animation-courtyard"
-    ]
+    ],
+    "mapPosition": {
+      "x": 74,
+      "y": 34
+    }
   }
 ];
