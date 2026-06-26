@@ -27,24 +27,159 @@ const moodFilters = [
   { id: "must_do", label: "⭐ חובה" },
 ];
 
+const ideaCards = [
+  {
+    id: "all",
+    title: "🗺️ הכול",
+    subtitle: "כל האפשרויות בניו יורק",
+    itemIds: [],
+  },
+  {
+    id: "midtown-kids",
+    title: "🏙️ Midtown Kids Loop",
+    subtitle: "חנויות, תצפית, Times Square ועצירות קלות",
+    itemIds: [
+      "bryant-park",
+      "ny-public-library",
+      "grand-central",
+      "summit-one-vanderbilt",
+      "rockefeller-center",
+      "fao-schwarz",
+      "nintendo-ny",
+      "lego-store-fifth-avenue",
+      "mms-world",
+      "disney-store-times-square",
+      "times-square",
+    ],
+  },
+  {
+    id: "central-park-museum",
+    title: "🌳 Central Park + Museum",
+    subtitle: "המוזיאון להיסטוריה של הטבע, פארק, טירה וגני משחקים",
+    itemIds: [
+      "american-museum-natural-history",
+      "central-park-main",
+      "belvedere-castle",
+      "heckscher-playground",
+      "ancient-playground",
+      "central-park-zoo",
+    ],
+  },
+  {
+    id: "west-side",
+    title: "🌉 West Side",
+    subtitle: "High Line, Chelsea Market, Little Island ו-Intrepid",
+    itemIds: [
+      "high-line",
+      "chelsea-market",
+      "little-island",
+      "intrepid-museum",
+      "pier-25",
+    ],
+  },
+  {
+    id: "flatiron-soho",
+    title: "🧙 Flatiron / SoHo",
+    subtitle: "Harry Potter, גלידה, פארקים קצרים ואווירה עירונית",
+    itemIds: [
+      "harry-potter-new-york",
+      "madison-square-park",
+      "museum-of-ice-cream",
+      "washington-square-park",
+    ],
+  },
+  {
+    id: "brooklyn-downtown",
+    title: "🌁 Brooklyn + Downtown",
+    subtitle: "DUMBO, פארק ברוקלין, קרוסלות, מעבורת ונוף",
+    itemIds: [
+      "dumbo",
+      "brooklyn-bridge",
+      "brooklyn-bridge-park",
+      "janes-carousel",
+      "battery-park",
+      "seaglass-carousel",
+      "staten-island-ferry",
+      "governors-island",
+    ],
+  },
+  {
+    id: "rainy-day",
+    title: "☔ יום גשם",
+    subtitle: "מקומות מקורים שלא מרגישים כמו פשרה",
+    itemIds: [
+      "summit-one-vanderbilt",
+      "american-museum-natural-history",
+      "fao-schwarz",
+      "nintendo-ny",
+      "lego-store-fifth-avenue",
+      "mms-world",
+      "harry-potter-new-york",
+      "museum-of-ice-cream",
+      "chelsea-market",
+      "intrepid-museum",
+      "ny-transit-museum",
+    ],
+  },
+  {
+    id: "low-energy",
+    title: "😴 יום רגוע",
+    subtitle: "בלי יותר מדי נסיעות ובלי עומס מוגזם",
+    itemIds: [
+      "bryant-park",
+      "ny-public-library",
+      "grand-central",
+      "rockefeller-center",
+      "fao-schwarz",
+      "central-park-main",
+      "madison-square-park",
+      "chelsea-market",
+      "little-island",
+      "dumbo",
+      "brooklyn-bridge-park",
+    ],
+  },
+];
+
 export default function NewYork() {
   const [selectedAreaId, setSelectedAreaId] = useState("all");
   const [activeCategory, setActiveCategory] = useState("all");
   const [activeMood, setActiveMood] = useState("all");
+  const [activeIdeaId, setActiveIdeaId] = useState("all");
+
+  const activeIdea = ideaCards.find((idea) => idea.id === activeIdeaId) || ideaCards[0];
 
   const filteredItems = useMemo(() => {
+    const activeIdeaItemIds = new Set(activeIdea.itemIds);
+
     return newYorkItems
+      .filter((item) => {
+        if (activeIdea.id === "all") return true;
+        return activeIdeaItemIds.has(item.id);
+      })
       .filter((item) => selectedAreaId === "all" || item.areaId === selectedAreaId)
       .filter((item) => activeCategory === "all" || item.category === activeCategory)
       .filter((item) => matchesMood(item, activeMood))
       .sort(sortItems);
-  }, [selectedAreaId, activeCategory, activeMood]);
+  }, [selectedAreaId, activeCategory, activeMood, activeIdea]);
 
   const selectedArea = newYorkAreas.find((area) => area.id === selectedAreaId);
-  const mapCenter = selectedArea?.center || newYorkCenter;
+  const mapCenter = getMapCenter(activeIdea, selectedArea);
 
   const diningItems = filteredItems.filter((item) => item.category === "dining");
   const nonDiningItems = filteredItems.filter((item) => item.category !== "dining");
+
+  function chooseIdea(ideaId) {
+    setActiveIdeaId(ideaId);
+    setSelectedAreaId("all");
+    setActiveCategory("all");
+    setActiveMood("all");
+  }
+
+  function chooseArea(areaId) {
+    setSelectedAreaId(areaId);
+    setActiveIdeaId("all");
+  }
 
   return (
     <main className="page">
@@ -53,8 +188,29 @@ export default function NewYork() {
       <h1 className="page-title">🗽 New York</h1>
 
       <p className="page-description">
-        אזורים, נקודות עניין ומפה אמיתית לניו יורק — בלי פרטים אישיים ובלי תאריכים.
+        מאגר אפשרויות משפחתי לניו יורק — לפי אזור, מצב רוח ורעיונות ליום.
       </p>
+
+      <section className="card playful-panel">
+        <h3>💡 רעיונות ליום</h3>
+        <p className="meta">
+          אלו לא מסלולים מחייבים — רק דרך מהירה לראות קבוצות של דברים שמתאימים יחד.
+        </p>
+
+        <div className="idea-grid">
+          {ideaCards.map((idea) => (
+            <button
+              key={idea.id}
+              type="button"
+              className={`idea-card ${activeIdeaId === idea.id ? "active" : ""}`}
+              onClick={() => chooseIdea(idea.id)}
+            >
+              <strong>{idea.title}</strong>
+              <span>{idea.subtitle}</span>
+            </button>
+          ))}
+        </div>
+      </section>
 
       <section className="card playful-panel">
         <h3>📍 איזה אזור?</h3>
@@ -73,7 +229,7 @@ export default function NewYork() {
               key={area.id}
               type="button"
               className={selectedAreaId === area.id ? "active" : ""}
-              onClick={() => setSelectedAreaId(area.id)}
+              onClick={() => chooseArea(area.id)}
             >
               {areaIcon(area.id)} {area.name}
             </button>
@@ -86,18 +242,18 @@ export default function NewYork() {
           <div>
             <h3>🗺️ מפת ניו יורק</h3>
             <p className="meta">
-              לחיצה על אזור או נקודה במפה תסנן/תפתח פרטים. צפון למעלה.
+              מוצגים כרגע {filteredItems.length} פריטים. לחיצה על נקודה פותחת פרטים.
             </p>
           </div>
 
-          <span className="tag">{filteredItems.length} פריטים</span>
+          <span className="tag">{activeIdea.title}</span>
         </div>
 
         <div className="real-map-wrap">
           <MapContainer
-            key={selectedAreaId}
+            key={`${selectedAreaId}-${activeIdeaId}`}
             center={mapCenter}
-            zoom={selectedArea ? 14 : 12}
+            zoom={selectedArea || activeIdea.id !== "all" ? 13 : 12}
             scrollWheelZoom={false}
             className="real-map"
           >
@@ -112,7 +268,7 @@ export default function NewYork() {
                 position={area.center}
                 icon={createAreaIcon(areaIcon(area.id), selectedAreaId === area.id)}
                 eventHandlers={{
-                  click: () => setSelectedAreaId(area.id),
+                  click: () => chooseArea(area.id),
                 }}
               >
                 <Popup>
@@ -125,7 +281,7 @@ export default function NewYork() {
                   <button
                     type="button"
                     className="popup-select-button"
-                    onClick={() => setSelectedAreaId(area.id)}
+                    onClick={() => chooseArea(area.id)}
                   >
                     הצג את האזור הזה
                   </button>
@@ -211,10 +367,28 @@ export default function NewYork() {
       )}
 
       {filteredItems.length === 0 && (
-        <div className="empty-state">אין כרגע פריטים שמתאימים לסינון הזה.</div>
+        <div className="empty-state">
+          אין כרגע פריטים שמתאימים לסינון הזה.
+        </div>
       )}
     </main>
   );
+}
+
+function getMapCenter(activeIdea, selectedArea) {
+  if (selectedArea) return selectedArea.center;
+
+  const ideaCenters = {
+    "midtown-kids": [40.7565, -73.9818],
+    "central-park-museum": [40.7794, -73.9705],
+    "west-side": [40.7475, -74.0048],
+    "flatiron-soho": [40.7338, -73.994],
+    "brooklyn-downtown": [40.702, -74.0005],
+    "rainy-day": [40.7485, -73.9875],
+    "low-energy": [40.753, -73.985],
+  };
+
+  return ideaCenters[activeIdea.id] || newYorkCenter;
 }
 
 function matchesMood(item, mood) {
@@ -316,6 +490,51 @@ function createItemIcon(emoji) {
 }
 
 const cityMapStyles = `
+.idea-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 12px;
+  margin-top: 12px;
+}
+
+.idea-card {
+  border: 1px solid #e2e8f0;
+  background: rgba(255, 255, 255, 0.92);
+  border-radius: 20px;
+  padding: 14px;
+  text-align: right;
+  cursor: pointer;
+  font-family: inherit;
+  box-shadow: 0 8px 18px rgba(15, 23, 42, 0.06);
+  transition: transform 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.idea-card:hover {
+  transform: translateY(-2px);
+  border-color: #93c5fd;
+  box-shadow: 0 12px 24px rgba(15, 23, 42, 0.1);
+}
+
+.idea-card.active {
+  border-color: #2563eb;
+  background: linear-gradient(135deg, #eff6ff 0%, #f5f3ff 100%);
+  box-shadow: 0 14px 28px rgba(37, 99, 235, 0.15);
+}
+
+.idea-card strong {
+  display: block;
+  margin-bottom: 6px;
+  color: #0f172a;
+  font-size: 1rem;
+}
+
+.idea-card span {
+  display: block;
+  color: #64748b;
+  font-size: 0.88rem;
+  line-height: 1.45;
+}
+
 .real-map-card {
   border-color: #bfdbfe;
   background:
