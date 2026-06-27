@@ -22,7 +22,7 @@ const parkEntrances = {
     {
       id: "international-gateway",
       label: "International Gateway",
-      note: "כניסה לא ראשית מאזור BoardWalk / Beach Club",
+      note: "כניסה לא ראשית מאזור BoardWalk / International Gateway",
       type: "secondary",
       x: 27,
       y: 58,

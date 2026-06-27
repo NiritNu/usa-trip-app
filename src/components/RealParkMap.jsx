@@ -41,7 +41,7 @@ const PARK_MAPS = {
         id: "international-gateway",
         label: "International Gateway",
         type: "secondary",
-        note: "כניסה לא ראשית מאזור BoardWalk / Beach Club",
+        note: "כניסה לא ראשית מאזור BoardWalk / International Gateway",
         position: [28.3707, -81.5584],
       },
     ],
