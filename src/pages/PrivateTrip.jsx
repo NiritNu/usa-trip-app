@@ -413,7 +413,15 @@ function SummaryTile({ label, icon, count, type }) {
 function getDayType(day) {
   if (day.type && DAY_TYPES[day.type]) return day.type;
 
-  const text = [
+  const primaryText = [
+    day.location,
+    day.title,
+  ]
+    .filter(Boolean)
+    .join(" ")
+    .toLowerCase();
+
+  const fullText = [
     day.location,
     day.title,
     day.status,
@@ -426,11 +434,92 @@ function getDayType(day) {
     .join(" ")
     .toLowerCase();
 
-  if (text.includes("new york") || text.includes("ניו יורק")) return "newYork";
-  if (text.includes("disney") || text.includes("דיסני") || text.includes("epcot") || text.includes("magic kingdom")) return "disney";
-  if (text.includes("universal") || text.includes("יוניברסל") || text.includes("epic")) return "universal";
-  if (text.includes("טיסה") || text.includes("flight") || text.includes("מעבר") || text.includes("צ׳ק אין") || text.includes("check in")) return "travel";
-  if (text.includes("מנוחה") || text.includes("גמיש") || text.includes("rest")) return "rest";
+  const isTravelDay =
+    primaryText.includes("טיסה") ||
+    primaryText.includes("flight") ||
+    primaryText.includes("מעבר") ||
+    primaryText.includes("צ׳ק אין") ||
+    primaryText.includes("צ'ק אין") ||
+    primaryText.includes("check in") ||
+    primaryText.includes("check-in") ||
+    primaryText.includes("check out") ||
+    primaryText.includes("check-out") ||
+    primaryText.includes("mco") ||
+    primaryText.includes("lga") ||
+    primaryText.includes("jfk") ||
+    primaryText.includes("tlv") ||
+    primaryText.includes("→");
+
+  if (isTravelDay) return "travel";
+
+  if (
+    primaryText.includes("universal") ||
+    primaryText.includes("יוניברסל") ||
+    primaryText.includes("epic")
+  ) {
+    return "universal";
+  }
+
+  if (
+    primaryText.includes("disney") ||
+    primaryText.includes("דיסני") ||
+    primaryText.includes("epcot") ||
+    primaryText.includes("magic kingdom") ||
+    primaryText.includes("hollywood studios") ||
+    primaryText.includes("animal kingdom") ||
+    primaryText.includes("halloween")
+  ) {
+    return "disney";
+  }
+
+  if (
+    primaryText.includes("new york") ||
+    primaryText.includes("ניו יורק")
+  ) {
+    return "newYork";
+  }
+
+  const isRestDay =
+    fullText.includes("מנוחה") ||
+    fullText.includes("גמיש") ||
+    fullText.includes("יום קל") ||
+    fullText.includes("בריכה") ||
+    fullText.includes("rest");
+
+  if (isRestDay) return "rest";
+
+  if (
+    fullText.includes("universal") ||
+    fullText.includes("יוניברסל") ||
+    fullText.includes("epic") ||
+    fullText.includes("islands of adventure") ||
+    fullText.includes("citywalk")
+  ) {
+    return "universal";
+  }
+
+  if (
+    fullText.includes("disney") ||
+    fullText.includes("דיסני") ||
+    fullText.includes("epcot") ||
+    fullText.includes("magic kingdom") ||
+    fullText.includes("hollywood studios") ||
+    fullText.includes("animal kingdom") ||
+    fullText.includes("halloween")
+  ) {
+    return "disney";
+  }
+
+  if (
+    fullText.includes("new york") ||
+    fullText.includes("ניו יורק") ||
+    fullText.includes("midtown") ||
+    fullText.includes("central park") ||
+    fullText.includes("brooklyn") ||
+    fullText.includes("downtown")
+  ) {
+    return "newYork";
+  }
 
   return "other";
 }
