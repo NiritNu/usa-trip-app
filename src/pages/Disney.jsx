@@ -1,6 +1,7 @@
 import { useMemo, useState } from "react";
 import AttractionCard from "../components/AttractionCard.jsx";
 import RealParkMap from "../components/RealParkMap.jsx";
+import EarlyEntryPanel from "../components/EarlyEntryPanel.jsx";
 import { disneyParks } from "../data/index.js";
 
 const categoryFilters = [
@@ -73,6 +74,8 @@ export default function Disney() {
       <p className="page-description">
         בחרי פארק, אזור ומצב רוח — כדי למצוא מהר מה מתאים לכם עכשיו.
       </p>
+
+      <EarlyEntryPanel />
 
       <section className="card playful-panel">
         <h3>🎡 איזה פארק?</h3>

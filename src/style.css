@@ -1155,3 +1155,56 @@ button {
 .private-debug-box code {
   color: #2563eb;
 }
+
+.early-entry-panel {
+  border-color: #bae6fd;
+  background:
+    radial-gradient(circle at top left, rgba(14, 165, 233, 0.16), transparent 28%),
+    rgba(255, 255, 255, 0.98);
+}
+
+.early-entry-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 14px;
+  margin-top: 16px;
+}
+
+.early-entry-card {
+  border: 1px solid #e2e8f0;
+  border-radius: 20px;
+  padding: 16px;
+  background: white;
+}
+
+.early-entry-card h3 {
+  margin: 0 0 8px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #0f172a;
+}
+
+.early-entry-card p {
+  margin: 0 0 12px;
+  color: #64748b;
+  font-size: 0.9rem;
+  line-height: 1.45;
+}
+
+.early-entry-card ul {
+  margin: 0;
+  padding-inline-start: 20px;
+  color: #334155;
+  line-height: 1.65;
+}
+
+.early-entry-card li {
+  margin-bottom: 4px;
+}
+
+@media (max-width: 640px) {
+  .early-entry-grid {
+    grid-template-columns: 1fr;
+  }
+}
