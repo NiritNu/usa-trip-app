@@ -7,7 +7,10 @@ import {
   newYorkAreas,
   newYorkCenter,
   newYorkItems,
+  newYorkDayRoutes,
 } from "../data/newYork/index.js";
+
+
 
 const categoryFilters = [
   { id: "all", label: "✨ הכול" },
@@ -190,6 +193,80 @@ export default function NewYork() {
       <p className="page-description">
         מאגר אפשרויות משפחתי לניו יורק — לפי אזור, מצב רוח ורעיונות ליום.
       </p>
+
+      <section className="card playful-panel">
+  <h3>🧭 מסלולי יום מוצעים</h3>
+
+  <p className="meta">
+    המסלולים לא קשורים כרגע לתאריך מסוים. אפשר לבחור בכל בוקר לפי מזג
+    האוויר, מצב הרוח והכוח, ואפשר גם להציע כל אחד מהם ליום עם החברים.
+  </p>
+
+  <div className="day-routes-grid">
+    {newYorkDayRoutes.map((route) => (
+      <details className="day-route-card" key={route.id}>
+        <summary>
+          <div>
+            <strong>{route.title}</strong>
+            <span>{route.subtitle}</span>
+          </div>
+        </summary>
+
+        <div className="day-route-content">
+          <p className="route-good-for">
+            <strong>💡 מתאים במיוחד:</strong> {route.goodFor}
+          </p>
+
+          <h4>📍 המסלול העיקרי</h4>
+
+          <ol className="route-stops">
+            {route.mainStops.map((stop) => {
+              const attraction = newYorkItems.find(
+                (item) => item.id === stop.id
+              );
+
+              return (
+                <li key={stop.id}>
+                  <strong>{attraction?.name || stop.id}</strong>
+                  <p>{stop.note}</p>
+                </li>
+              );
+            })}
+          </ol>
+
+          {(route.optionalStops?.length > 0 ||
+            route.freeTextOptions?.length > 0) && (
+            <>
+              <h4>⭐ אופציות קרובות לפי כוח ומצב רוח</h4>
+
+              <ul className="route-options">
+                {route.optionalStops?.map((stop) => {
+                  const attraction = newYorkItems.find(
+                    (item) => item.id === stop.id
+                  );
+
+                  return (
+                    <li key={stop.id}>
+                      <strong>{attraction?.name || stop.id}</strong>
+                      <p>{stop.note}</p>
+                    </li>
+                  );
+                })}
+
+                {route.freeTextOptions?.map((stop) => (
+                  <li key={stop.title}>
+                    <strong>{stop.title}</strong>
+                    <p>{stop.note}</p>
+                  </li>
+                ))}
+              </ul>
+            </>
+          )}
+        </div>
+      </details>
+    ))}
+  </div>
+</section>
 
       <section className="card playful-panel">
         <h3>💡 רעיונות ליום</h3>
@@ -595,6 +672,76 @@ const cityMapStyles = `
   cursor: pointer;
   font-family: inherit;
   font-size: 0.82rem;
+}
+
+.day-routes-grid {
+  display: grid;
+  gap: 12px;
+  margin-top: 14px;
+}
+
+.day-route-card {
+  border: 1px solid #dbeafe;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.95);
+  overflow: hidden;
+  box-shadow: 0 8px 20px rgba(15, 23, 42, 0.06);
+}
+
+.day-route-card summary {
+  cursor: pointer;
+  padding: 16px;
+  list-style: none;
+}
+
+.day-route-card summary::-webkit-details-marker {
+  display: none;
+}
+
+.day-route-card summary strong {
+  display: block;
+  color: #0f172a;
+  font-size: 1.05rem;
+}
+
+.day-route-card summary span {
+  display: block;
+  color: #64748b;
+  font-size: 0.9rem;
+  margin-top: 5px;
+  line-height: 1.45;
+}
+
+.day-route-card[open] summary {
+  background: linear-gradient(135deg, #eff6ff 0%, #f5f3ff 100%);
+  border-bottom: 1px solid #dbeafe;
+}
+
+.day-route-content {
+  padding: 4px 18px 18px;
+}
+
+.route-good-for {
+  background: #f8fafc;
+  padding: 10px 12px;
+  border-radius: 12px;
+}
+
+.route-stops,
+.route-options {
+  padding-right: 22px;
+}
+
+.route-stops li,
+.route-options li {
+  margin-bottom: 12px;
+}
+
+.route-stops p,
+.route-options p {
+  margin: 4px 0 0;
+  color: #64748b;
+  line-height: 1.5;
 }
 
 @media (max-width: 640px) {

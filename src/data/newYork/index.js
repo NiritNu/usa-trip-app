@@ -1035,5 +1035,229 @@ export const newYorkItems = [
     "intensity": "calm",
     "durationMin": 25,
     "tip": "לא חובה בגלל שיש לכם דיסני בהמשך, אבל נחמד אם כבר באזור."
+  },
+  {
+    "id": "pier-57",
+    "name": "Pier 57 Rooftop Park",
+    "areaId": "west-side",
+    "area": "West Side / Chelsea",
+    "park": "New York",
+    "category": "park",
+    "shortDescription": "מזח משופץ עם פארק גג חינמי ונוף להדסון ול-Little Island.",
+    "position": [40.7425, -74.0116],
+    "priority": "good_if_time",
+    "indoor": false,
+    "rainFriendly": false,
+    "familyMode": "all_together",
+    "suitableFor": ["preschooler", "youngKid", "olderKid", "adults"],
+    "intensity": "calm",
+    "durationMin": 40,
+    "tip": "נמצא ממש ליד Little Island ו-Chelsea Market. טוב לעצירה, נוף ואוכל."
+  }
+];
+export const newYorkDayRoutes = [
+  {
+    id: "midtown-summit",
+    title: "🏙️ Midtown + SUMMIT",
+    subtitle: "יום עירוני קל יחסית, מרוכז גיאוגרפית ומתאים גם ליום הראשון",
+    goodFor: "יום רגוע יחסית / מזג אוויר משתנה",
+    mainStops: [
+      {
+        id: "bryant-park",
+        note: "פארק קטן ונעים בלב Midtown. טוב לפתוח בו את היום או לעצור לקפה ומנוחה."
+      },
+      {
+        id: "ny-public-library",
+        note: "הספרייה הציבורית המרשימה של ניו יורק. עצירה קצרה של כ-20–30 דקות ליד Bryant Park."
+      },
+      {
+        id: "grand-central",
+        note: "תחנת הרכבת האייקונית עם האולם הגדול והתקרה המפורסמת. לא צריך להקדיש לה הרבה זמן."
+      },
+      {
+        id: "summit-one-vanderbilt",
+        note: "התצפית שבחרנו. חוויה אינטראקטיבית עם מראות ונוף, בערך 90 דקות. אפשר להזמין גם באותו יום לפי זמינות."
+      },
+      {
+        id: "rockefeller-center",
+        note: "אזור קלאסי של ניו יורק עם רחבה, חנויות ואווירה. מתאים לסיום נינוח של המסלול."
+      }
+    ],
+    optionalStops: [
+      {
+        id: "fao-schwarz",
+        note: "חנות צעצועים מפורסמת ליד Rockefeller Center. נחמד לילדים ולא דורש התחייבות."
+      },
+      {
+        id: "nintendo-ny",
+        note: "חנות Nintendo עם מוצרים ודמויות. מתאימה במיוחד אם הילדים אוהבים משחקים."
+      },
+      {
+        id: "lego-store-fifth-avenue",
+        note: "חנות LEGO גדולה וחווייתית. קרובה ל-Rockefeller Center."
+      },
+      {
+        id: "times-square",
+        note: "שווה לראות פעם אחת בשביל האורות והאווירה, אבל לא צריך לבנות עליו הרבה זמן."
+      },
+      {
+        id: "mms-world",
+        note: "חנות גדולה וצבעונית של M&M’s. אופציה אם הילדים רוצים, לא יעד בפני עצמו."
+      }
+    ]
+  },
+
+  {
+    id: "central-park-museum",
+    title: "🌳 Central Park + Natural History Museum",
+    subtitle: "פארק, דינוזאורים ומוזיאון שמתאים מאוד לילדים",
+    goodFor: "יום חם / יום עם מזג אוויר לא יציב / יום משפחתי",
+    mainStops: [
+      {
+        id: "central-park-main",
+        note: "לא מנסים לראות את כל Central Park. בוחרים אזור קטן ונעים ומשלבים אותו עם המוזיאון."
+      },
+      {
+        id: "american-museum-natural-history",
+        note: "מוזיאון טבע ענק עם דינוזאורים, חלל ובעלי חיים. כדאי לבחור מראש כמה אזורים ולא לנסות לראות הכול."
+      }
+    ],
+    optionalStops: [
+      {
+        id: "belvedere-castle",
+        note: "טירה קטנה בתוך Central Park עם נקודת תצפית נחמדה. מתאימה אם יש כוח להמשיך לטייל."
+      },
+      {
+        id: "heckscher-playground",
+        note: "גן משחקים גדול ומוצלח. טוב לתת לילדים הפסקה מפעילויות 'של מבוגרים'."
+      },
+      {
+        id: "ancient-playground",
+        note: "גן משחקים עם עיצוב בהשראת מצרים העתיקה, ליד אזור המוזיאונים."
+      },
+      {
+        id: "central-park-zoo",
+        note: "גן חיות קטן יחסית. רק אם הילדים ממש רוצים; אחרת הוא עלול להעמיס על היום."
+      }
+    ]
+  },
+
+  {
+    id: "brooklyn-dumbo",
+    title: "🌁 Brooklyn Bridge + DUMBO",
+    subtitle: "גשר, נוף למנהטן, פארק וקרוסלה",
+    goodFor: "יום עם מזג אוויר יפה",
+    mainStops: [
+      {
+        id: "brooklyn-bridge",
+        note: "הליכה על הגשר עצמו עם נוף למנהטן ולברוקלין. לא חייבים ללכת הלוך וחזור."
+      },
+      {
+        id: "dumbo",
+        note: "שכונה יפה מתחת לגשרים, עם רחובות מצטלמים, אוכל ונוף."
+      },
+      {
+        id: "brooklyn-bridge-park",
+        note: "פארק גדול על קו המים עם נוף למנהטן, אזורי ישיבה ומשחק."
+      },
+      {
+        id: "janes-carousel",
+        note: "קרוסלה היסטורית בתוך מבנה זכוכית מול הנוף של מנהטן. עצירה קצרה וכיפית במיוחד לקטנה."
+      }
+    ],
+    optionalStops: [
+      {
+        id: "staten-island-ferry",
+        note: "מעבורת חינמית שמאפשרת לראות את Statue of Liberty מהמים. מוסיפה בערך שעה ומעלה, ולכן רק אם בא לנו שיט."
+      },
+      {
+        id: "governors-island",
+        note: "אי עם פארקים ושטחים פתוחים. אופציה רק אם רוצים להפוך את היום ליום ארוך יותר."
+      }
+    ]
+  },
+
+  {
+    id: "chelsea-west-side",
+    title: "🌉 Hudson Yards + High Line + Chelsea",
+    subtitle: "יום הליכה נעים עם אוכל, פארקים ונוף להדסון",
+    goodFor: "יום יפה / יום שרוצים בו פחות אטרקציות סגורות",
+    mainStops: [
+      {
+        id: "high-line",
+        note: "פארק מוגבה שנבנה על מסילת רכבת ישנה. הולכים מעל הרחובות בין צמחייה, אמנות ונוף לעיר."
+      },
+      {
+        id: "chelsea-market",
+        note: "מתחם אוכל מקורה עם הרבה אפשרויות. מקום מצוין לעצירת צהריים כשכל אחד רוצה משהו אחר."
+      },
+      {
+        id: "little-island",
+        note: "פארק מיוחד שבנוי מעל נהר ההדסון, עם שבילים, גבעות ותצפיות. נחמד במיוחד לילדים."
+      }
+    ],
+    optionalStops: [
+      {
+        id: "pier-57",
+        note: "מזח עם Rooftop Park חינמי, נוף להדסון ומקום טוב לעצירה. בפנים יש אוכל ואזורי ישיבה."
+      },
+      {
+        id: "intrepid-museum",
+        note: "מוזיאון על נושאת מטוסים עם מטוסים וחלל. יכול להפוך את היום להרבה יותר ארוך, אז רק אם זה ממש מעניין."
+      },
+      {
+        id: "pier-25",
+        note: "אזור על הנהר עם מרחבים ומשחקים. אופציה אם רוצים להמשיך דרומה."
+      },
+      {
+        id: "intrepid-museum",
+        note: "מוזיאון גדול על נושאת המטוסים USS Intrepid, עם מטוסים, מעבורת החלל Enterprise וצוללת. זו אטרקציה של כמה שעות, ולכן אם בוחרים בה כדאי לקצר את ה-High Line / Chelsea ולא לראות אותה כ'עוד עצירה קטנה'."
+      },
+    ]
+  },
+
+  {
+    id: "soho-village",
+    title: "🍦 SoHo + Museum of Ice Cream + Village",
+    subtitle: "יום קליל וצבעוני עם חוויה לילדים ושיטוט בשכונות",
+    goodFor: "יום ספונטני / יום פחות עמוס",
+    mainStops: [
+      {
+        id: "museum-of-ice-cream",
+        note: "חוויה אינטראקטיבית ומשחקית עם חדרים צבעוניים, גלידה ובריכת סוכריות. בערך 60–90 דקות."
+      },
+      {
+        id: "washington-square-park",
+        note: "פארק עירוני עם הקשת המפורסמת, מזרקה, מוזיקה ואווירה. מקום טוב לעצור ולתת לילדים לנוח."
+      }
+    ],
+    optionalStops: [
+      {
+        id: "harry-potter-new-york",
+        note: "חנות חווייתית של Harry Potter. לא ממש צמודה ל-SoHo אבל יכולה להשתלב אם הילדים אוהבים."
+      },
+      {
+        id: "madison-square-park",
+        note: "פארק קטן ונעים ליד Flatiron. מתאים אם מרחיבים את המסלול צפונה."
+      }
+    ],
+    freeTextOptions: [
+      {
+        title: "SoHo",
+        note: "שיטוט ברחובות, חנויות, אוכל ואווירה. אין צורך בזמן מוגדר."
+      },
+      {
+        title: "Greenwich Village",
+        note: "רחובות קטנים, בתי קפה ו-brownstones. טוב להמשך רגוע אחרי Washington Square Park."
+      },
+      {
+        title: "Chinatown",
+        note: "אוכל, חנויות ואווירה שונה מאוד משאר מנהטן. אפשר להוסיף אם יש כוח."
+      },
+      {
+        title: "Little Italy",
+        note: "אזור קטן וצמוד ל-Chinatown. בעיקר מסעדות ואווירה; לא יעד שחייבים להגיע אליו במיוחד."
+      }
+    ]
   }
 ];
