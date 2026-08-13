@@ -326,6 +326,36 @@ const checklistGroups = [
         note: "חוברות צביעה / מבוכים / מדבקות / פעילויות לטיסה.",
         priority: "medium",
       },
+      {
+        id: "water-bottles",
+        title: "בקבוקי מים",
+        note: "בקבוקים רב-פעמיים לפארקים. למלא לפני היציאה ולשמור נגיש בתיק.",
+        priority: "high",
+      },
+      {
+        id: "portable-chargers",
+        title: "כמה מטענים ניידים לפארקים",
+        note: "להביא כמה Power Banks טעונים, כולל כבלים מתאימים לטלפונים.",
+        priority: "high",
+      },
+      {
+        id: "portable-fans",
+        title: "מאווררים ניידים",
+        note: "להביא כמה מאווררים קטנים לפארקים, רצוי נטענים.",
+        priority: "high",
+      },
+      {
+        id: "sunscreen",
+        title: "קרם הגנה",
+        note: "להביא קרם הגנה לפארקים ולחדש במהלך היום.",
+        priority: "high",
+      },
+      {
+        id: "rain-jackets",
+        title: "מעילי גשם",
+        note: "מעילי גשם קלים/מתקפלים לפארקים, אחד לכל אחד.",
+        priority: "high",
+      },
     ],
   },
   {
