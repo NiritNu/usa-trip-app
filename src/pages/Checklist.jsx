@@ -167,6 +167,12 @@ const checklistGroups = [
         note: "להביא עותק מודפס בנוסף לכרטיסים בטלפון.",
         priority: "high",
       },
+      {
+        id: "airport-transfers",
+        title: "לסגור הסעות משדות התעופה למלונות",
+        note: "NYC: שדה תעופה ↔ מלון. Orlando: MCO → Disney Beach Club, ובחזרה Universal → MCO.",
+        priority: "high",
+      },
     ],
   },
   {
