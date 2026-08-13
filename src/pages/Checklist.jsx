@@ -314,6 +314,18 @@ const checklistGroups = [
         note: "לארוז במקום נגיש ובנרתיק.",
         priority: "high",
       },
+      {
+        id: "flight-games",
+        title: "משחקים לטיסה",
+        note: "להכין כמה משחקים קטנים ונוחים לילדים לטיסה.",
+        priority: "medium",
+      },
+      {
+        id: "activity-books",
+        title: "חוברות הפעלה",
+        note: "חוברות צביעה / מבוכים / מדבקות / פעילויות לטיסה.",
+        priority: "medium",
+      },
     ],
   },
   {
